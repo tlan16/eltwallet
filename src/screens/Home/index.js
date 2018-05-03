@@ -7,7 +7,7 @@ import {
   PrimaryButton,
   SecondaryButton,
 } from '../../components';
-import logo from './images/logo.png';
+import logo from './images/exce_logo.png';
 
 const styles = StyleSheet.create({
   container: {
