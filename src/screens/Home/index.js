@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
+import { Image, SafeAreaView, StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Config from 'react-native-config';
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    flexGrow: 1,
+    flexGrow: 0.3,
     justifyContent: 'center',
     width: '100%',
   },
@@ -29,6 +29,18 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     paddingHorizontal: 15,
     width: '100%',
+  },
+  logoTitlesContainer: {
+    alignItems: 'center',
+    flexGrow: 0.6,
+    justifyContent: 'center',
+    width: '100%',
+  },
+  logoTitle: {
+    color: '#FFFFFF',
+  },
+  logoSubtitle: {
+    color: '#FFFFFF',
   },
 });
 
@@ -45,6 +57,10 @@ class Home extends Component {
         <SafeAreaView style={styles.container}>
           <View style={styles.logoContainer}>
             <Image source={logo} style={styles.logo} resizeMode="contain" />
+          </View>
+          <View style={styles.logoTitlesContainer}>
+            <Text style={styles.logoTitle}>Exce</Text>
+            <Text style={styles.logoSubtitle}>Innovative Emporium Wallet</Text>
           </View>
           <View style={styles.buttonsContainer}>
             <PrimaryButton
