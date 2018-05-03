@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Image, SafeAreaView, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Config from 'react-native-config';
 import {
   GradientBackground,
   PrimaryButton,
@@ -11,7 +12,7 @@ import logo from './images/exce_logo.png';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'transparent',
+    backgroundColor: Config.LANDING_PG_BG_COLOR || 'transparent',
     flex: 1,
     paddingBottom: 20,
     paddingHorizontal: 15,
