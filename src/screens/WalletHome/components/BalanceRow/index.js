@@ -3,9 +3,10 @@ import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Text } from '../../../../components';
-
+import IconBadge from 'react-native-icon-badge';
 import switchIcon from './images/switch.png';
 import settingsIcon from './images/settings.png';
+import MessageIcon from './messageIcon';
 
 const styles = StyleSheet.create({
   container: {
@@ -83,6 +84,9 @@ class BalanceRow extends Component {
           </Text>
         </View>
         <View style={styles.iconsContainer}>
+          <TouchableOpacity>
+            <MessageIcon />
+          </TouchableOpacity>
           <TouchableOpacity onPress={onTokenChangeIconPress}>
             <Image source={switchIcon} style={styles.switchIcon} />
           </TouchableOpacity>
