@@ -12,10 +12,10 @@ const styles = StyleSheet.create({
   messageContainer: {
     alignItems: 'center',
   },
-  messageBrief: {
-    color: '#fff',
-    fontSize: 16,
-  },
+  // messageBrief: {
+  //   color: '#fff',
+  //   fontSize: 16,
+  // },
 });
 class MessageList extends Component {
   messageOnPress() {
@@ -33,6 +33,22 @@ class MessageList extends Component {
         body: 'here is some body content',
         updatedAt: '2018-05-07T06:25:36.629Z',
         createdAt: '2018-05-07T06:25:36.629Z',
+        recipients: [
+          {
+            address: '0x22222',
+          },
+          {
+            address: '0x33333',
+          },
+        ],
+      },
+      {
+        uuid: '75652f4d-d07d-4e61-b862-36e6597dc723',
+        sender_address: '0x12345               ',
+        title: 'titles',
+        body: 'here is some body content',
+        updatedAt: '2018-03-07T08:25:36.629Z',
+        createdAt: '2018-03-07T08:25:36.629Z',
         recipients: [
           {
             address: '0x22222',
@@ -60,9 +76,11 @@ class MessageList extends Component {
             title="Messages"
           />
           <Messages options={options} />
-          <View style={styles.messageContainer}>
-            <Text style={styles.messageBrief} />
-          </View>
+          {/* <View style={styles.messageContainer}>
+              <Text style={styles.messageBrief}>
+                
+              </Text>
+            </View> */}
         </SafeAreaView>
       </GradientBackground>
     );

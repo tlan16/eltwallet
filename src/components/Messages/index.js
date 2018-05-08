@@ -100,7 +100,11 @@ export default class Messages extends Component {
   render() {
     return (
       <ScrollView style={styles.listContainer}>
-        {this.props.options.map(this.renderOption)}
+        {this.props.options.map(this.renderOption).sort((optionA, optionB) => {
+          const sendAtA = new Date(optionA.at);
+          const sendAtB = new Date(optionB.at);
+          return sendAtA > sendAtB ? -1 : sendAtA < sendAtB ? 1 : 0;
+        })}
       </ScrollView>
     );
   }
