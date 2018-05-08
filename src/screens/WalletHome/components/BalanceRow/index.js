@@ -63,6 +63,7 @@ class BalanceRow extends Component {
     }).isRequired,
     onTokenChangeIconPress: PropTypes.func.isRequired,
     onSettingsIconPress: PropTypes.func.isRequired,
+    onMessageIconPress: PropTypes.func.isRequired,
   };
 
   render() {
@@ -71,8 +72,8 @@ class BalanceRow extends Component {
       selectedToken,
       onTokenChangeIconPress,
       onSettingsIconPress,
+      onMessageIconPress,
     } = this.props;
-
     return (
       <View style={styles.container}>
         <View style={styles.balanceContainer}>
@@ -84,7 +85,7 @@ class BalanceRow extends Component {
           </Text>
         </View>
         <View style={styles.iconsContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onMessageIconPress}>
             <MessageIcon />
           </TouchableOpacity>
           <TouchableOpacity onPress={onTokenChangeIconPress}>

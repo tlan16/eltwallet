@@ -6,6 +6,7 @@ import PinKeyboard from './PinKeyboard';
 import PrimaryButton from './PrimaryButton';
 import SecondaryButton from './SecondaryButton';
 import Text from './Text';
+import Messages from './Messages';
 
 export {
   GradientBackground,
@@ -16,4 +17,5 @@ export {
   PrimaryButton,
   SecondaryButton,
   Text,
+  Messages,
 };

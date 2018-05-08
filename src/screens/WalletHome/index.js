@@ -96,6 +96,7 @@ class WalletHome extends Component {
   onCallToActionPress = () => {
     this.props.navigation.navigate('Settings');
     this.props.navigation.navigate('PrivateKey');
+    this.props.navigation.navigate('MessageList');
   };
 
   onCallToActionDismiss = () => {
@@ -182,6 +183,10 @@ class WalletHome extends Component {
               onSettingsIconPress={() =>
                 this.props.navigation.navigate('Settings')
               }
+              onMessageIconPress={() => {
+                console.log('**********');
+                return this.props.navigation.navigate('MessageList');
+              }}
             />
             {!this.props.callToActionDismissed && (
               <CallToAction

@@ -3,6 +3,7 @@ import AppLoadingScreen from './AppLoading';
 import CameraScreen from './Camera';
 import CreateWalletScreen from './CreateWallet';
 import HomeScreen from './Home';
+import MessageListScreen from './MessageList';
 import NetworkPickerScreen from './NetworkPicker';
 import PinCodeScreen from './PinCode';
 import PrivateKeyScreen from './PrivateKey';
@@ -19,6 +20,7 @@ export {
   CameraScreen,
   CreateWalletScreen,
   HomeScreen,
+  MessageListScreen,
   NetworkPickerScreen,
   PinCodeScreen,
   PrivateKeyScreen,

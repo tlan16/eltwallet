@@ -5,6 +5,7 @@ import {
   CameraScreen,
   CreateWalletScreen,
   HomeScreen,
+  MessageListScreen,
   NetworkPickerScreen,
   PinCodeScreen,
   PrivateKeyScreen,
@@ -65,6 +66,9 @@ const WalletMainNavigator = StackNavigator(
     },
     TokenPicker: {
       screen: TokenPickerScreen,
+    },
+    MessageList: {
+      screen: MessageListScreen,
     },
   },
   {
