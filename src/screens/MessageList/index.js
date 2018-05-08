@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Alert, Linking, SafeAreaView, StyleSheet, View } from 'react-native';
 import { GradientBackground, Header, Messages, Text } from '../../components';
+import { NavigationActions } from 'react-navigation';
+import { connect } from 'react-redux';
+import { SELECT_MESSAGE } from '../../config/actionTypes';
 
 const styles = StyleSheet.create({
   container: {
@@ -18,54 +21,34 @@ const styles = StyleSheet.create({
   // },
 });
 class MessageList extends Component {
-  messageOnPress() {
-    console.log('message on press');
+  constructor(props) {
+    super(props);
+    this.messageOnPress = this.messageOnPress.bind(this);
+  }
+  messageOnPress(id) {
+    const { messages, selectMessage } = this.props;
+    const message = messages.filter(mesg => {
+      return mesg.uuid == id;
+    })[0];
+    console.log(message);
+    console.log('###############');
+    selectMessage(message);
+    this.props.navigation.navigate('ViewMessage');
   }
   deleteMessage() {
     console.log('delete message');
   }
   render() {
-    const messages = [
-      {
-        uuid: '75652f4d-d07d-4e61-b862-36e6597dc723',
-        sender_address: '0x12345               ',
-        title: 'titles',
-        body: 'here is some body content',
-        updatedAt: '2018-05-07T06:25:36.629Z',
-        createdAt: '2018-05-07T06:25:36.629Z',
-        recipients: [
-          {
-            address: '0x22222',
-          },
-          {
-            address: '0x33333',
-          },
-        ],
-      },
-      {
-        uuid: '75652f4d-d07d-4e61-b862-36e6597dc723',
-        sender_address: '0x12345               ',
-        title: 'titles',
-        body: 'here is some body content',
-        updatedAt: '2018-03-07T08:25:36.629Z',
-        createdAt: '2018-03-07T08:25:36.629Z',
-        recipients: [
-          {
-            address: '0x22222',
-          },
-          {
-            address: '0x33333',
-          },
-        ],
-      },
-    ];
+    const { messages } = this.props;
     const options = messages.map(message => {
       return {
+        id: message.uuid,
         from: message.sender_address,
         at: message.updatedAt,
         onPress: this.messageOnPress,
         swipeToDelete: false,
         onDeletePress: this.deleteMessage,
+        content: message.body,
       };
     });
     return (
@@ -87,4 +70,13 @@ class MessageList extends Component {
   }
 }
 
-export default MessageList;
+const mapStateToProps = state => ({
+  messages: state.messages,
+});
+
+const mapDispatchToProps = dispatch => ({
+  selectMessage: selectedMessage =>
+    dispatch({ type: SELECT_MESSAGE, selectedMessage }),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(MessageList);

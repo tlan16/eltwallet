@@ -8,3 +8,4 @@ export const SET_NETWORK = 'SET_NETWORK';
 export const SET_PIN_CODE = 'SET_PIN_CODE';
 export const SET_PRIVATE_KEY = 'SET_PRIVATE_KEY';
 export const SET_WALLET_ADDRESS = 'SET_WALLET_ADDRESS';
+export const SELECT_MESSAGE = 'SELECT_MESSAGE';

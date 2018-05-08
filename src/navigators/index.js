@@ -12,6 +12,7 @@ import {
   RecoverWalletScreen,
   SettingsScreen,
   TokenPickerScreen,
+  ViewMessageScreen,
   WalletHomeScreen,
   WalletReceiveScreen,
   WalletSendScreen,
@@ -69,6 +70,9 @@ const WalletMainNavigator = StackNavigator(
     },
     MessageList: {
       screen: MessageListScreen,
+    },
+    ViewMessage: {
+      screen: ViewMessageScreen,
     },
   },
   {

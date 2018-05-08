@@ -10,6 +10,7 @@ import PrivateKeyScreen from './PrivateKey';
 import RecoverWalletScreen from './RecoverWallet';
 import SettingsScreen from './Settings';
 import TokenPickerScreen from './TokenPicker';
+import ViewMessageScreen from './ViewMessage';
 import WalletHomeScreen from './WalletHome';
 import WalletReceiveScreen from './WalletReceive';
 import WalletSendScreen from './WalletSend';
@@ -27,6 +28,7 @@ export {
   RecoverWalletScreen,
   SettingsScreen,
   TokenPickerScreen,
+  ViewMessageScreen,
   WalletHomeScreen,
   WalletReceiveScreen,
   WalletSendScreen,

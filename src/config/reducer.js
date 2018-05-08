@@ -10,15 +10,53 @@ import {
   SET_PIN_CODE,
   SET_PRIVATE_KEY,
   SET_WALLET_ADDRESS,
+  SELECT_MESSAGE,
 } from './actionTypes';
 import { defaultTokens } from '../utils/constants';
 import AnalyticsUtils from '../utils/analytics';
+
+const defaultmessages = [
+  {
+    uuid: '0',
+    sender_address: '0x12345               ',
+    title: 'title0',
+    body: 'here is some body content 0',
+    updatedAt: '2018-05-07T06:25:36.629Z',
+    createdAt: '2018-05-07T06:25:36.629Z',
+    recipients: [
+      {
+        address: '0x22222',
+      },
+      {
+        address: '0x33333',
+      },
+    ],
+  },
+  {
+    uuid: '1',
+    sender_address: '0x12345               ',
+    title: 'title1',
+    body: 'here is some body content 1',
+    updatedAt: '2018-03-07T08:25:36.629Z',
+    createdAt: '2018-03-07T08:25:36.629Z',
+    recipients: [
+      {
+        address: '0x22222',
+      },
+      {
+        address: '0x33333',
+      },
+    ],
+  },
+];
 
 const defaultState = {
   availableTokens: defaultTokens,
   callToActionDismissed: false,
   selectedToken: defaultTokens[0],
   network: 'mainnet',
+  messages: defaultmessages,
+  selectedMessage: defaultmessages[0],
 };
 
 const appReducer = (state = defaultState, action) => {
@@ -96,6 +134,11 @@ const appReducer = (state = defaultState, action) => {
       return {
         ...state,
         walletAddress: action.walletAddress,
+      };
+    case SELECT_MESSAGE:
+      return {
+        ...state,
+        selectedMessage: action.selectedMessage,
       };
     default:
       return state;
