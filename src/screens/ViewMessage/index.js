@@ -50,7 +50,6 @@ class ViewMessage extends Component {
     navigation: PropTypes.shape({
       goBack: PropTypes.func.isRequired,
     }).isRequired,
-    privateKey: PropTypes.string.isRequired,
   };
 
   render() {

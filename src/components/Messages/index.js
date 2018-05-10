@@ -27,7 +27,7 @@ const Messages = ({ options }) => {
     <ScrollView style={styles.listContainer}>
       {options
         .map((option, index) => {
-          return <MessageItem option={option} index={index} />;
+          return <MessageItem key={index} option={option} index={index} />;
         })
         .sort((optionA, optionB) => {
           const sendAtA = new Date(optionA.at);
