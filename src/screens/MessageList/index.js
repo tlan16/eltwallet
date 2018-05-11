@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
-import { Alert, Linking, SafeAreaView, StyleSheet, View } from 'react-native';
-import { GradientBackground, Header, Messages, Text } from '../../components';
+import {
+  Alert,
+  Linking,
+  SafeAreaView,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+} from 'react-native';
+//import { Header } from 'react-native-elements';
+import { GradientBackground, Messages, Text, Header } from '../../components';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { SELECT_MESSAGE } from '../../config/actionTypes';
+import ComposeIcon from './components/composeIcon';
+//import  BackIcon from './components/backIcon'
 
 const styles = StyleSheet.create({
   container: {
@@ -12,13 +22,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingBottom: 15,
   },
+  headerContainer: {
+    borderBottomColor: 'transparent',
+    flexDirection: 'row',
+    paddingTop: 30,
+    paddingHorizontal: 15,
+  },
+  headerText: {
+    color: '#fff',
+    fontSize: 27,
+  },
   messageContainer: {
     alignItems: 'center',
   },
-  // messageBrief: {
-  //   color: '#fff',
-  //   fontSize: 16,
-  // },
 });
 class MessageList extends Component {
   constructor(props) {
@@ -30,8 +46,6 @@ class MessageList extends Component {
     const message = messages.filter(mesg => {
       return mesg.uuid == id;
     })[0];
-    console.log(message);
-    console.log('###############');
     selectMessage(message);
     this.props.navigation.navigate('ViewMessage');
   }
@@ -57,13 +71,9 @@ class MessageList extends Component {
           <Header
             onBackPress={() => this.props.navigation.goBack()}
             title="Messages"
+            rightComponent={<ComposeIcon />}
           />
           <Messages options={options} />
-          {/* <View style={styles.messageContainer}>
-              <Text style={styles.messageBrief}>
-                
-              </Text>
-            </View> */}
         </SafeAreaView>
       </GradientBackground>
     );

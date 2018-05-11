@@ -28,37 +28,54 @@ const styles = StyleSheet.create({
     width: 22,
   },
 });
-
-export default class Header extends Component {
-  static propTypes = {
-    onBackPress: PropTypes.func,
-    title: PropTypes.string.isRequired,
-  };
-
-  static defaultProps = {
-    onBackPress: null,
-  };
-
-  render() {
-    return (
-      <View
-        style={
-          this.props.onBackPress
-            ? styles.headerContainer
-            : styles.centeredContainer
-        }
-      >
-        {this.props.onBackPress ? (
-          <TouchableOpacity
-            style={styles.headerExtremity}
-            onPress={this.props.onBackPress}
-          >
-            <Image source={arrow} style={styles.headerArrow} />
-          </TouchableOpacity>
-        ) : null}
-        <Text style={styles.headerText}>{this.props.title}</Text>
-        <View style={styles.headerExtremity} />
+const Header = ({ onBackPress, title, rightComponent }) => {
+  return (
+    <View
+      style={onBackPress ? styles.headerContainer : styles.centeredContainer}
+    >
+      {onBackPress ? (
+        <TouchableOpacity style={styles.headerExtremity} onPress={onBackPress}>
+          <Image source={arrow} style={styles.headerArrow} />
+        </TouchableOpacity>
+      ) : null}
+      <Text style={styles.headerText}>{title}</Text>
+      <View style={styles.headerExtremity}>
+        {rightComponent ? <View>{rightComponent}</View> : null}
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
+export default Header;
+// export default class Header extends Component {
+//   static propTypes = {
+//     onBackPress: PropTypes.func,
+//     title: PropTypes.string.isRequired,
+//   };
+
+//   static defaultProps = {
+//     onBackPress: null,
+//   };
+
+//   render() {
+//     return (
+//       <View
+//         style={
+//           this.props.onBackPress
+//             ? styles.headerContainer
+//             : styles.centeredContainer
+//         }
+//       >
+//         {this.props.onBackPress ? (
+//           <TouchableOpacity
+//             style={styles.headerExtremity}
+//             onPress={this.props.onBackPress}
+//           >
+//             <Image source={arrow} style={styles.headerArrow} />
+//           </TouchableOpacity>
+//         ) : null}
+//         <Text style={styles.headerText}>{this.props.title}</Text>
+//         <View style={styles.headerExtremity} />
+//       </View>
+//     );
+//   }
+// }
