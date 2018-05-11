@@ -7,7 +7,9 @@
     "precommit": "lint-staged",
     "postinstall": "./scripts/postinstall.sh",
     "postversion": "react-native-version",
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "ios" : "react-native run-ios",
+    "android": "react-native run-android"
   },
   "dependencies": {
     "analytics-react-native": "1.2.0",

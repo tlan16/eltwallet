@@ -14,11 +14,13 @@ import ViewMessageScreen from './ViewMessage';
 import WalletHomeScreen from './WalletHome';
 import WalletReceiveScreen from './WalletReceive';
 import WalletSendScreen from './WalletSend';
+import ComposeMessageScreen from './ComposeMessage';
 
 export {
   AddTokenScreen,
   AppLoadingScreen,
   CameraScreen,
+  ComposeMessageScreen,
   CreateWalletScreen,
   HomeScreen,
   MessageListScreen,

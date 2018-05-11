@@ -3,6 +3,7 @@ import {
   AddTokenScreen,
   AppLoadingScreen,
   CameraScreen,
+  ComposeMessageScreen,
   CreateWalletScreen,
   HomeScreen,
   MessageListScreen,
@@ -73,6 +74,9 @@ const WalletMainNavigator = StackNavigator(
     },
     ViewMessage: {
       screen: ViewMessageScreen,
+    },
+    ComposeMessage: {
+      screen: ComposeMessageScreen,
     },
   },
   {

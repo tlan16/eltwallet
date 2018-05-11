@@ -71,7 +71,11 @@ class MessageList extends Component {
           <Header
             onBackPress={() => this.props.navigation.goBack()}
             title="Messages"
-            rightComponent={<ComposeIcon />}
+            rightComponent={
+              <ComposeIcon
+                onPress={() => this.props.navigation.navigate('ComposeMessage')}
+              />
+            }
           />
           <Messages options={options} />
         </SafeAreaView>
