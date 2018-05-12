@@ -11,6 +11,7 @@ import {
 } from './components';
 import { SET_CALL_TO_ACTION_DISMISSED } from '../../config/actionTypes';
 import WalletUtils from '../../utils/wallet';
+import { fetchMessages } from '../../actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -70,6 +71,7 @@ class WalletHome extends Component {
     this.addEventListeners();
     this.onRefresh();
     this.loadTokensList();
+    this.fetchMessages();
   }
 
   componentWillReceiveProps(newProps) {
@@ -118,6 +120,13 @@ class WalletHome extends Component {
   onRefresh = () => {
     this.fetchBalance();
     this.fetchTransactions();
+  };
+
+  fetchMessages = () => {
+    console.log('>>>>>>>');
+    const walletAddress = this.props.walletAddress;
+    const fetchMessagesStart = this.props.fetchMessagesStart;
+    fetchMessagesStart(walletAddress);
   };
 
   handleAppStateChange = nextAppState => {
@@ -233,6 +242,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   dismissCallToAction: () => dispatch({ type: SET_CALL_TO_ACTION_DISMISSED }),
+  fetchMessagesStart: walletAddress => dispatch(fetchMessages(walletAddress)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletHome);
