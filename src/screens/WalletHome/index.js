@@ -12,6 +12,7 @@ import {
 import { SET_CALL_TO_ACTION_DISMISSED } from '../../config/actionTypes';
 import WalletUtils from '../../utils/wallet';
 import { fetchMessages } from '../../actions';
+import timer from 'react-native-timer';
 
 const styles = StyleSheet.create({
   container: {
@@ -72,6 +73,7 @@ class WalletHome extends Component {
     this.onRefresh();
     this.loadTokensList();
     this.fetchMessages();
+    setInterval(this.fetchMessages, 5000);
   }
 
   componentWillReceiveProps(newProps) {
@@ -93,6 +95,7 @@ class WalletHome extends Component {
 
   componentWillUnmount() {
     this.removeEventListeners();
+    clearInterval();
   }
 
   onCallToActionPress = () => {
@@ -123,7 +126,6 @@ class WalletHome extends Component {
   };
 
   fetchMessages = () => {
-    console.log('>>>>>>>');
     const walletAddress = this.props.walletAddress;
     const fetchMessagesStart = this.props.fetchMessagesStart;
     fetchMessagesStart(walletAddress);
