@@ -7,13 +7,11 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-//import { Header } from 'react-native-elements';
 import { GradientBackground, Messages, Text, Header } from '../../components';
 import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { SELECT_MESSAGE } from '../../config/actionTypes';
 import ComposeIcon from './components/composeIcon';
-//import  BackIcon from './components/backIcon'
 
 const styles = StyleSheet.create({
   container: {
@@ -58,11 +56,12 @@ class MessageList extends Component {
       return {
         id: message.uuid,
         from: message.sender_address,
-        at: message.updatedAt,
+        at: message.createdAt,
         onPress: this.messageOnPress,
         swipeToDelete: false,
         onDeletePress: this.deleteMessage,
         content: message.body,
+        readAt: message.read_at,
       };
     });
     return (

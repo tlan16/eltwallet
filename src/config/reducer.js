@@ -55,8 +55,8 @@ const defaultState = {
   callToActionDismissed: false,
   selectedToken: defaultTokens[0],
   network: 'mainnet',
-  messages: defaultmessages,
-  selectedMessage: defaultmessages[0],
+  messages: [],
+  selectedMessage: null,
 };
 
 const appReducer = (state = defaultState, action) => {

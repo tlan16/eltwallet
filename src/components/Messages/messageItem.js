@@ -11,6 +11,8 @@ import {
 import Swipeout from 'react-native-swipeout';
 import Text from '../Text';
 import arrow from './images/arrow.png';
+import read from './images/read.png';
+import transparent from './images/transparent.png';
 
 const styles = StyleSheet.create({
   messageContainer: {
@@ -37,6 +39,7 @@ const styles = StyleSheet.create({
 });
 
 const MessageItem = ({ option, index }) => {
+  const isRead = option.readAt ? transparent : read;
   if (option.swipeToDelete) {
     const swipeoutButtons = [
       {
@@ -57,7 +60,9 @@ const MessageItem = ({ option, index }) => {
           }}
         >
           <View style={styles.rowContainer}>
+            <Image source={isRead} style={styles.rowIcon} />
             <View stype={styles.messageContainer}>
+              <Text style={styles.rowText}>{option.id}</Text>
               <Text style={styles.rowText}>{option.from}</Text>
               <Text style={styles.rowText}>{option.at}</Text>
             </View>
@@ -76,6 +81,7 @@ const MessageItem = ({ option, index }) => {
       key={index}
     >
       <View style={styles.rowContainer}>
+        <Image source={isRead} style={styles.rowIcon} />
         <View stype={styles.messageContainer}>
           <Text style={styles.rowText}>{option.from}</Text>
           <Text style={styles.rowText}>{option.at}</Text>

@@ -16,6 +16,22 @@ export const messageService = store => next => action => {
         const messages = JSON.parse(res.text);
         next(receiveMessages(messages));
       });
+      break;
+    case 'SELECT_MESSAGE':
+      const message = { ...action.selectedMessage, read_at: new Date() };
+      const message_uuid = action.selectedMessage.uuid;
+      const mark_message_as_read_url = `${base_url}/api/message/mark-read/${message_uuid}`;
+      console.log(mark_message_as_read_url);
+      request
+        .put(mark_message_as_read_url)
+        .set('Content-Type', 'json')
+        .end((err, res) => {
+          if (err) {
+            console.log(err);
+          }
+          console.log(res);
+        });
+      break;
     default:
       break;
   }

@@ -25,15 +25,15 @@ const styles = StyleSheet.create({
 const Messages = ({ options }) => {
   return (
     <ScrollView style={styles.listContainer}>
-      {options
-        .map((option, index) => {
-          return <MessageItem key={index} option={option} index={index} />;
-        })
-        .sort((optionA, optionB) => {
-          const sendAtA = new Date(optionA.at);
-          const sendAtB = new Date(optionB.at);
-          return sendAtA > sendAtB ? -1 : sendAtA < sendAtB ? 1 : 0;
-        })}
+      {options.map((option, index) => {
+        return <MessageItem key={index} option={option} index={index} />;
+      })
+      // .sort((optionA, optionB) => {
+      //   const sendAtA = new Date(optionA.at);
+      //   const sendAtB = new Date(optionB.at);
+      //   return sendAtA > sendAtB ? -1 : sendAtA < sendAtB ? 1 : 0;
+      // })
+      }
     </ScrollView>
   );
 };
