@@ -6,7 +6,6 @@ export const messageService = store => next => action => {
   next(action);
   switch (action.type) {
     case 'FETCH_MESSAGES_START':
-      console.log('***********');
       const fetch_messages_url = `${base_url}/api/message/recipient/${
         action.address
       }`;

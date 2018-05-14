@@ -140,6 +140,11 @@ const appReducer = (state = defaultState, action) => {
         ...state,
         selectedMessage: action.selectedMessage,
       };
+    case 'FETCH_MESSAGES_SUCCESS':
+      return {
+        ...state,
+        messages: action.messages,
+      };
     default:
       return state;
   }
