@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import { Image, StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import IconBadge from 'react-native-icon-badge';
 import messageImg from './images/message.png';
+import { connect } from 'react-redux';
 
 class MessageIcon extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      BadgeCount: 1,
-    };
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     BadgeCount: 1,
+  //   };
+  // }
   render() {
+    const badgeCount = this.props.messages.length;
     return (
       <View
         style={{
@@ -30,19 +32,21 @@ class MessageIcon extends Component {
               }}
             />
           }
-          BadgeElement={
-            <Text style={{ color: '#FFFFFF' }}>{this.state.BadgeCount}</Text>
-          }
+          BadgeElement={<Text style={{ color: '#FFFFFF' }}>{badgeCount}</Text>}
           IconBadgeStyle={{
             width: 17,
             height: 17,
             backgroundColor: '#FF00EE',
           }}
-          Hidden={this.state.BadgeCount == 0}
+          Hidden={badgeCount == 0}
         />
       </View>
     );
   }
 }
 
-export default MessageIcon;
+const mapStateToProps = state => ({
+  messages: state.messages,
+});
+
+export default connect(mapStateToProps)(MessageIcon);

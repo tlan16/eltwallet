@@ -11,11 +11,9 @@ export const messageService = store => next => action => {
       }`;
       request.get(fetch_messages_url).end((err, res) => {
         if (err) {
-          console.log(err);
           return next(failToReceive(err));
         }
         const messages = JSON.parse(res.text);
-        console.log(messages);
         next(receiveMessages(messages));
       });
     default:
