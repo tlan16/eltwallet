@@ -3,6 +3,8 @@ import { Alert, SafeAreaView, StyleSheet, View } from 'react-native';
 import { GradientBackground, Header, SecondaryButton } from '../../components';
 import Form from './components/form';
 import SendIcon from './components/sendIcon';
+import WalletUtils from '../../utils/wallet';
+import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,6 +19,23 @@ const styles = StyleSheet.create({
   },
 });
 class ComposeMessage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      transactions: [],
+    };
+  }
+  async fetchTransactions() {
+    const transactions = await WalletUtils.getTransactions(
+      this.props.selectedToken,
+    );
+    console.log(transactions);
+    console.log(transactions);
+    this.setState({ transactions });
+  }
+  componentDidMount() {
+    this.fetchTransactions();
+  }
   render() {
     return (
       <GradientBackground>
@@ -32,4 +51,9 @@ class ComposeMessage extends Component {
     );
   }
 }
-export default ComposeMessage;
+
+const mapStateToProps = state => ({
+  selectedToken: state.selectedToken,
+});
+
+export default connect(mapStateToProps)(ComposeMessage);

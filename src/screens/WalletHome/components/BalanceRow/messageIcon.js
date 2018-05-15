@@ -5,12 +5,6 @@ import messageImg from './images/message.png';
 import { connect } from 'react-redux';
 
 class MessageIcon extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     BadgeCount: 1,
-  //   };
-  // }
   render() {
     const badgeCount = this.props.messages.length;
     return (

@@ -54,7 +54,6 @@ class ViewMessage extends Component {
 
   render() {
     const { selectedMessage } = this.props;
-    console.log(selectedMessage);
     return (
       <GradientBackground>
         <SafeAreaView style={styles.container}>
