@@ -12,6 +12,7 @@ import { NavigationActions } from 'react-navigation';
 import { connect } from 'react-redux';
 import { SELECT_MESSAGE } from '../../config/actionTypes';
 import ComposeIcon from './components/composeIcon';
+import IsSending from './components/isSending';
 
 const styles = StyleSheet.create({
   container: {
@@ -64,11 +65,12 @@ class MessageList extends Component {
         readAt: message.read_at,
       };
     });
+    if (this.props.isSendingMessage) return <IsSending />;
     return (
       <GradientBackground>
         <SafeAreaView style={styles.container}>
           <Header
-            onBackPress={() => this.props.navigation.goBack()}
+            onBackPress={() => this.props.navigation.navigate('WalletHome')}
             title="Messages"
             rightComponent={
               <ComposeIcon
@@ -85,6 +87,7 @@ class MessageList extends Component {
 
 const mapStateToProps = state => ({
   messages: state.messages,
+  isSendingMessage: state.isSendingMessage,
 });
 
 const mapDispatchToProps = dispatch => ({

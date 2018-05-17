@@ -34,7 +34,6 @@ const App = () => (
         onNavigationStateChange={(prevState, currentState) => {
           const currentScreen = getCurrentRouteName(currentState);
           const prevScreen = getCurrentRouteName(prevState);
-
           if (prevScreen !== currentScreen) {
             AnalyticsUtils.trackScreen(currentScreen);
           }

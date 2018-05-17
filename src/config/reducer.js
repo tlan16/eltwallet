@@ -57,6 +57,7 @@ const defaultState = {
   network: 'mainnet',
   messages: [],
   selectedMessage: null,
+  isSendingMessage: false,
 };
 
 const appReducer = (state = defaultState, action) => {
@@ -144,6 +145,23 @@ const appReducer = (state = defaultState, action) => {
       return {
         ...state,
         messages: action.messages,
+      };
+    case 'SEND_MESSAGE_SUCCESS':
+      console.log('!!!!!!!!!');
+      return {
+        ...state,
+        isSendingMessage: false,
+      };
+    case 'SEND_MESSAGE_START':
+      console.log('%%%%%%%%%');
+      return {
+        ...state,
+        isSendingMessage: true,
+      };
+    case 'SEND_MESSAGE_FAIL':
+      return {
+        ...state,
+        isSendingMessage: false,
       };
     default:
       return state;

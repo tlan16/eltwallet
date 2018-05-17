@@ -12,7 +12,6 @@ import {
 import { SET_CALL_TO_ACTION_DISMISSED } from '../../config/actionTypes';
 import WalletUtils from '../../utils/wallet';
 import { fetchMessages } from '../../actions';
-import timer from 'react-native-timer';
 
 const styles = StyleSheet.create({
   container: {
@@ -68,12 +67,19 @@ class WalletHome extends Component {
     transactions: [],
   };
 
+  timerId = null;
   componentDidMount() {
     this.addEventListeners();
     this.onRefresh();
     this.loadTokensList();
     this.fetchMessages();
-    setInterval(this.fetchMessages, 5000);
+    this.timerId = setInterval(this.fetchMessages, 5000);
+  }
+  leaveHomePage(page, callbackObject) {
+    this.props.navigation.navigate(page, callbackObject);
+    if (this.timerId) {
+      clearInterval(this.timerId);
+    }
   }
 
   componentWillReceiveProps(newProps) {
@@ -95,13 +101,12 @@ class WalletHome extends Component {
 
   componentWillUnmount() {
     this.removeEventListeners();
-    clearInterval();
+    clearInterval(this.timerId);
   }
 
   onCallToActionPress = () => {
-    this.props.navigation.navigate('Settings');
-    this.props.navigation.navigate('PrivateKey');
-    this.props.navigation.navigate('MessageList');
+    //  this.props.navigation.navigate('Settings');
+    //   this.props.navigation.navigate('PrivateKey');
   };
 
   onCallToActionDismiss = () => {
@@ -137,7 +142,8 @@ class WalletHome extends Component {
     this.setState({ appState: nextAppState });
 
     if (currentState === 'background' && nextAppState === 'active') {
-      this.props.navigation.navigate('PinCode');
+      // this.props.navigation.navigate('PinCode');
+      this.leaveHomePage('PinCode');
     }
   };
 
@@ -189,14 +195,16 @@ class WalletHome extends Component {
             <BalanceRow
               currentBalance={this.state.currentBalance}
               onTokenChangeIconPress={() =>
-                this.props.navigation.navigate('TokenPicker')
+                // this.props.navigation.navigate('TokenPicker')
+                this.leaveHomePage('TokenPicker')
               }
               onSettingsIconPress={() =>
-                this.props.navigation.navigate('Settings')
+                // this.props.navigation.navigate('Settings')
+                this.leaveHomePage('Settings')
               }
               onMessageIconPress={() => {
-                console.log('**********');
-                return this.props.navigation.navigate('MessageList');
+                //return this.props.navigation.navigate('MessageList');
+                return this.leaveHomePage('MessageList');
               }}
             />
             {!this.props.callToActionDismissed && (
@@ -225,7 +233,10 @@ class WalletHome extends Component {
           <Footer
             onReceivePress={() => this.props.navigation.navigate('Receive')}
             onSendPress={() =>
-              this.props.navigation.navigate('Send', {
+              // this.props.navigation.navigate('Send', {
+              //   onTokenChange: this.onTokenChange,
+              // })
+              this.leaveHomePage('Send', {
                 onTokenChange: this.onTokenChange,
               })
             }

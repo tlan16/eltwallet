@@ -3,12 +3,14 @@ import {
   fetchMessages,
   receiveMessages,
   failToReceive,
+  sendMessageStart,
   sendMessageSuccess,
   sendMessageFail,
 } from '../actions';
 import { getMessageList } from '../utils/messages';
 
 const base_url = `http://${window.location.hostname}:3000`;
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export const messageService = store => next => action => {
   next(action);
@@ -19,8 +21,8 @@ export const messageService = store => next => action => {
     case 'SELECT_MESSAGE':
       markMessageAsRead(action.selectedMessage);
       break;
-    case 'SEND_MESSAGE_START':
-      sendMessageStart(action.message);
+    case 'SEND_MESSAGE':
+      sendMessage(action.message, sendMessageSuccess, sendMessageFail, next);
       break;
     default:
       break;
@@ -53,21 +55,17 @@ const markMessageAsRead = selectedMessage => {
     });
 };
 
-const sendMessageStart = (
-  message,
-  sendMessageSuccess,
-  sendMessageFail,
-  next,
-) => {
+const sendMessage = (message, sendMessageSuccess, sendMessageFail, next) => {
   const create_message_url = `${base_url}/api/message`;
+  next(sendMessageStart());
   request
     .post(create_message_url)
     .send(message)
     .set('Accept', 'application/json')
     .end((err, res) => {
       if (err) {
-        next(sendMessageFail);
+        delay(2000).then(() => next(sendMessageFail(err)));
       }
-      next(sendMessageSuccess);
+      delay(2000).then(() => next(sendMessageSuccess()));
     });
 };
