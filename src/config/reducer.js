@@ -147,13 +147,11 @@ const appReducer = (state = defaultState, action) => {
         messages: action.messages,
       };
     case 'SEND_MESSAGE_SUCCESS':
-      console.log('!!!!!!!!!');
       return {
         ...state,
         isSendingMessage: false,
       };
     case 'SEND_MESSAGE_START':
-      console.log('%%%%%%%%%');
       return {
         ...state,
         isSendingMessage: true,

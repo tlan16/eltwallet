@@ -51,6 +51,7 @@ class MessageList extends Component {
   deleteMessage() {
     console.log('delete message');
   }
+
   render() {
     const { messages } = this.props;
     const options = messages.map(message => {
