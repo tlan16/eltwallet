@@ -1,7 +1,7 @@
 import request from 'superagent';
 import {
-  fetchMessages,
   receiveMessages,
+  receiveUnreadMessageCount,
   failToReceive,
   sendMessageStart,
   sendMessageSuccess,
@@ -16,20 +16,27 @@ export const messageService = store => next => action => {
   next(action);
   switch (action.type) {
     case 'FETCH_MESSAGES_START':
-      fetchMessagesStart(action.address, receiveMessages, failToReceive, next);
+      fetchMessages(action.address, receiveMessages, failToReceive, next);
       break;
     case 'SELECT_MESSAGE':
       markMessageAsRead(action.selectedMessage);
       break;
     case 'SEND_MESSAGE':
       sendMessage(action.message, sendMessageSuccess, sendMessageFail, next);
+    case 'FETCH_UNREAD_MESSAGE_COUNT_START':
+      fetchUnreadMessageCount(
+        action.address,
+        receiveUnreadMessageCount,
+        failToReceive,
+        next,
+      );
       break;
     default:
       break;
   }
 };
 
-const fetchMessagesStart = (address, receiveMessages, failToReceive, next) => {
+const fetchMessages = (address, receiveMessages, failToReceive, next) => {
   const fetch_messages_url = `${base_url}/api/messages/recipient/${address}`;
   request.get(fetch_messages_url).end((err, res) => {
     if (err) {
@@ -37,6 +44,23 @@ const fetchMessagesStart = (address, receiveMessages, failToReceive, next) => {
     }
     const messages = getMessageList(JSON.parse(res.text));
     next(receiveMessages(messages));
+  });
+};
+
+const fetchUnreadMessageCount = (
+  address,
+  receiveUnreadMessageCount,
+  failToReceive,
+  next,
+) => {
+  const fetch_unread_messages_count_url = `${base_url}/api/unread-message/recipient/${address}/count`;
+  request.get(fetch_unread_messages_count_url).end((err, res) => {
+    if (err) {
+      return next(failToReceive(err));
+    }
+    const count = JSON.parse(res.text);
+    console.log(count, '....');
+    next(receiveUnreadMessageCount(count));
   });
 };
 

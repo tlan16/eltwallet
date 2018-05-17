@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 
 class MessageIcon extends Component {
   render() {
-    const badgeCount = this.props.messages.length;
+    // const badgeCount = this.props.messages.length;
+    const badgeCount = this.props.unreadMessageCount;
     return (
       <View
         style={{
@@ -40,7 +41,8 @@ class MessageIcon extends Component {
 }
 
 const mapStateToProps = state => ({
-  messages: state.messages,
+  // messages: state.messages,
+  unreadMessageCount: state.unreadMessageCount,
 });
 
 export default connect(mapStateToProps)(MessageIcon);

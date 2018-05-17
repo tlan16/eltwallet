@@ -58,6 +58,7 @@ const defaultState = {
   messages: [],
   selectedMessage: null,
   isSendingMessage: false,
+  unreadMessageCount: 0,
 };
 
 const appReducer = (state = defaultState, action) => {
@@ -140,6 +141,11 @@ const appReducer = (state = defaultState, action) => {
       return {
         ...state,
         selectedMessage: action.selectedMessage,
+      };
+    case 'FETCH_UNREAD_MESSAGE_SUCCESS':
+      return {
+        ...state,
+        unreadMessageCount: action.count,
       };
     case 'FETCH_MESSAGES_SUCCESS':
       return {
