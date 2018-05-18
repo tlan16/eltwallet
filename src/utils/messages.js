@@ -4,6 +4,12 @@ export const getMessageList = messageObj => {
   });
 };
 
-export const getMessageById = (id, messageObj) => {
-  return messageObj[id];
+export const markMessageAsRead = (selectedMessage, messages) => {
+  return messages.map(message => {
+    if (message.uuid == selectedMessage.uuid) {
+      const read_at = new Date();
+      return { ...message, read_at };
+    }
+    return message;
+  });
 };

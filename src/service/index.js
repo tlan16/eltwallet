@@ -23,6 +23,7 @@ export const messageService = store => next => action => {
       break;
     case 'SEND_MESSAGE':
       sendMessage(action.message, sendMessageSuccess, sendMessageFail, next);
+      break;
     case 'FETCH_UNREAD_MESSAGE_COUNT_START':
       fetchUnreadMessageCount(
         action.address,
@@ -59,7 +60,6 @@ const fetchUnreadMessageCount = (
       return next(failToReceive(err));
     }
     const count = JSON.parse(res.text);
-    console.log(count, '....');
     next(receiveUnreadMessageCount(count));
   });
 };
@@ -68,6 +68,7 @@ const markMessageAsRead = selectedMessage => {
   const message = { ...selectedMessage, read_at: new Date() };
   const message_uuid = selectedMessage.uuid;
   const mark_message_as_read_url = `${base_url}/api/message/mark-read/${message_uuid}`;
+  console.log(mark_message_as_read_url);
   request
     .put(mark_message_as_read_url)
     .set('Content-Type', 'json')
