@@ -68,7 +68,6 @@ const markMessageAsRead = selectedMessage => {
   const message = { ...selectedMessage, read_at: new Date() };
   const message_uuid = selectedMessage.uuid;
   const mark_message_as_read_url = `${base_url}/api/message/mark-read/${message_uuid}`;
-  console.log(mark_message_as_read_url);
   request
     .put(mark_message_as_read_url)
     .set('Content-Type', 'json')

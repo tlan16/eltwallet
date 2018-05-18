@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
   rowText: {
     color: '#fff',
     fontSize: 18,
+    flex: 3,
   },
   rowIcon: {
     height: 15,
@@ -62,7 +63,6 @@ const MessageItem = ({ option, index }) => {
           <View style={styles.rowContainer}>
             <Image source={isRead} style={styles.rowIcon} />
             <View stype={styles.messageContainer}>
-              <Text style={styles.rowText}>{option.id}</Text>
               <Text style={styles.rowText}>{option.from}</Text>
               <Text style={styles.rowText}>{option.at}</Text>
             </View>
@@ -84,6 +84,7 @@ const MessageItem = ({ option, index }) => {
         <Image source={isRead} style={styles.rowIcon} />
         <View stype={styles.messageContainer}>
           <Text style={styles.rowText}>{option.from}</Text>
+          <Text style={styles.rowText}>{option.title}</Text>
           <Text style={styles.rowText}>{option.at}</Text>
         </View>
         <Image source={arrow} style={styles.rowIcon} />

@@ -75,7 +75,7 @@ export default class TransactionsList extends Component {
       transactions,
       walletAddress,
     } = this.props;
-
+    console.log(this.props.timestamp);
     return (
       <FlatList
         data={transactions}

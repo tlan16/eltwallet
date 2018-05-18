@@ -14,6 +14,7 @@ import { SELECT_MESSAGE } from '../../config/actionTypes';
 import ComposeIcon from './components/composeIcon';
 import IsSending from './components/isSending';
 import { fetchMessages } from '../../actions';
+import moment from 'moment';
 
 const styles = StyleSheet.create({
   container: {
@@ -52,14 +53,12 @@ class MessageList extends Component {
       return mesg.uuid == id;
     })[0];
     selectMessage(message);
-    //this.props.navigation.navigate('ViewMessage');
     this.leaveMessageListPage('ViewMessage');
   }
   deleteMessage() {
     console.log('delete message');
   }
   fetchMessages = () => {
-    console.log('FETCH_____');
     const walletAddress = this.props.walletAddress;
     const fetchMessagesStart = this.props.fetchMessagesStart;
     fetchMessagesStart(walletAddress);
@@ -73,15 +72,20 @@ class MessageList extends Component {
   render() {
     const { messages } = this.props;
     const options = messages.map(message => {
+      const showFrom = message.sender_nickname
+        ? message.sender_nickname
+        : 'Anonymous';
+      console.log(moment(message.at));
       return {
         id: message.uuid,
-        from: message.sender_address,
-        at: message.createdAt,
+        from: showFrom,
+        at: message.created_at,
         onPress: this.messageOnPress,
         swipeToDelete: false,
         onDeletePress: this.deleteMessage,
         content: message.body,
         readAt: message.read_at,
+        title: message.title,
       };
     });
     if (this.props.isSendingMessage) return <IsSending />;
@@ -89,17 +93,11 @@ class MessageList extends Component {
       <GradientBackground>
         <SafeAreaView style={styles.container}>
           <Header
-            onBackPress={() =>
-              // this.props.navigation.navigate('WalletHome')
-              this.leaveMessageListPage('WalletHome')
-            }
+            onBackPress={() => this.leaveMessageListPage('WalletHome')}
             title="Messages"
             rightComponent={
               <ComposeIcon
-                onPress={() =>
-                  // this.props.navigation.navigate('ComposeMessage')
-                  this.leaveMessageListPage('ComposeMessage')
-                }
+                onPress={() => this.leaveMessageListPage('ComposeMessage')}
               />
             }
           />
