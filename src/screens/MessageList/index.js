@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import { SELECT_MESSAGE } from '../../config/actionTypes';
 import ComposeIcon from './components/composeIcon';
 import IsSending from './components/isSending';
+import { fetchMessages } from '../../actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -39,6 +40,11 @@ class MessageList extends Component {
   constructor(props) {
     super(props);
     this.messageOnPress = this.messageOnPress.bind(this);
+    this.timerId = null;
+  }
+  componentDidMount() {
+    this.fetchMessages();
+    this.timerId = setInterval(this.fetchMessages, 5000);
   }
   messageOnPress(id) {
     const { messages, selectMessage } = this.props;
@@ -46,11 +52,24 @@ class MessageList extends Component {
       return mesg.uuid == id;
     })[0];
     selectMessage(message);
-    this.props.navigation.navigate('ViewMessage');
+    //this.props.navigation.navigate('ViewMessage');
+    this.leaveMessageListPage('ViewMessage');
   }
   deleteMessage() {
     console.log('delete message');
   }
+  fetchMessages = () => {
+    console.log('FETCH_____');
+    const walletAddress = this.props.walletAddress;
+    const fetchMessagesStart = this.props.fetchMessagesStart;
+    fetchMessagesStart(walletAddress);
+  };
+
+  leaveMessageListPage = (page, callbackObj) => {
+    if (this.timerId) clearInterval(this.timerId);
+    this.props.navigation.navigate(page, callbackObj);
+  };
+
   render() {
     const { messages } = this.props;
     const options = messages.map(message => {
@@ -70,11 +89,17 @@ class MessageList extends Component {
       <GradientBackground>
         <SafeAreaView style={styles.container}>
           <Header
-            onBackPress={() => this.props.navigation.navigate('WalletHome')}
+            onBackPress={() =>
+              // this.props.navigation.navigate('WalletHome')
+              this.leaveMessageListPage('WalletHome')
+            }
             title="Messages"
             rightComponent={
               <ComposeIcon
-                onPress={() => this.props.navigation.navigate('ComposeMessage')}
+                onPress={() =>
+                  // this.props.navigation.navigate('ComposeMessage')
+                  this.leaveMessageListPage('ComposeMessage')
+                }
               />
             }
           />
@@ -88,9 +113,11 @@ class MessageList extends Component {
 const mapStateToProps = state => ({
   messages: state.messages,
   isSendingMessage: state.isSendingMessage,
+  walletAddress: state.walletAddress,
 });
 
 const mapDispatchToProps = dispatch => ({
+  fetchMessagesStart: walletAddress => dispatch(fetchMessages(walletAddress)),
   selectMessage: selectedMessage =>
     dispatch({ type: SELECT_MESSAGE, selectedMessage }),
 });

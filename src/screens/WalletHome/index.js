@@ -11,7 +11,7 @@ import {
 } from './components';
 import { SET_CALL_TO_ACTION_DISMISSED } from '../../config/actionTypes';
 import WalletUtils from '../../utils/wallet';
-import { fetchMessages } from '../../actions';
+import { fetchMessages, fetchUnreadMessageCount } from '../../actions';
 
 const styles = StyleSheet.create({
   container: {
@@ -72,8 +72,9 @@ class WalletHome extends Component {
     this.addEventListeners();
     this.onRefresh();
     this.loadTokensList();
-    this.fetchMessages();
-    this.timerId = setInterval(this.fetchMessages, 5000);
+    // this.fetchMessages();
+    this.fetchUnreadMessageCount();
+    this.timerId = setInterval(this.fetchUnreadMessageCount, 5000);
   }
   leaveHomePage(page, callbackObject) {
     this.props.navigation.navigate(page, callbackObject);
@@ -134,6 +135,13 @@ class WalletHome extends Component {
     const walletAddress = this.props.walletAddress;
     const fetchMessagesStart = this.props.fetchMessagesStart;
     fetchMessagesStart(walletAddress);
+  };
+
+  fetchUnreadMessageCount = () => {
+    const walletAddress = this.props.walletAddress;
+    const fetchUnreadMessageCountStart = this.props
+      .fetchUnreadMessageCountStart;
+    fetchUnreadMessageCountStart(walletAddress);
   };
 
   handleAppStateChange = nextAppState => {
@@ -204,6 +212,7 @@ class WalletHome extends Component {
               }
               onMessageIconPress={() => {
                 //return this.props.navigation.navigate('MessageList');
+                this.fetchMessages();
                 return this.leaveHomePage('MessageList');
               }}
             />
@@ -256,6 +265,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   dismissCallToAction: () => dispatch({ type: SET_CALL_TO_ACTION_DISMISSED }),
   fetchMessagesStart: walletAddress => dispatch(fetchMessages(walletAddress)),
+  fetchUnreadMessageCountStart: walletAddress =>
+    dispatch(fetchUnreadMessageCount(walletAddress)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WalletHome);

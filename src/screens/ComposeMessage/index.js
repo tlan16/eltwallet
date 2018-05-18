@@ -136,7 +136,7 @@ class ComposeMessage extends Component {
       <GradientBackground>
         <SafeAreaView style={styles.container}>
           <Header
-            onBackPress={() => this.props.navigation.goBack()}
+            onBackPress={() => this.props.navigation.navigate('MessageList')}
             title="Compose"
             rightComponent={
               <SendIcon

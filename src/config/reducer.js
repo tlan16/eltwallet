@@ -14,7 +14,7 @@ import {
 } from './actionTypes';
 import { defaultTokens } from '../utils/constants';
 import AnalyticsUtils from '../utils/analytics';
-
+import { markMessageAsRead } from '../utils/messages';
 const defaultmessages = [
   {
     uuid: '0',
@@ -58,6 +58,7 @@ const defaultState = {
   messages: [],
   selectedMessage: null,
   isSendingMessage: false,
+  unreadMessageCount: 0,
 };
 
 const appReducer = (state = defaultState, action) => {
@@ -137,9 +138,19 @@ const appReducer = (state = defaultState, action) => {
         walletAddress: action.walletAddress,
       };
     case SELECT_MESSAGE:
+      const messages = markMessageAsRead(
+        action.selectedMessage,
+        state.messages,
+      );
       return {
         ...state,
+        messages: messages,
         selectedMessage: action.selectedMessage,
+      };
+    case 'FETCH_UNREAD_MESSAGE_SUCCESS':
+      return {
+        ...state,
+        unreadMessageCount: action.count,
       };
     case 'FETCH_MESSAGES_SUCCESS':
       return {
@@ -147,13 +158,11 @@ const appReducer = (state = defaultState, action) => {
         messages: action.messages,
       };
     case 'SEND_MESSAGE_SUCCESS':
-      console.log('!!!!!!!!!');
       return {
         ...state,
         isSendingMessage: false,
       };
     case 'SEND_MESSAGE_START':
-      console.log('%%%%%%%%%');
       return {
         ...state,
         isSendingMessage: true,
