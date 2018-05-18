@@ -9,7 +9,7 @@ import {
 } from '../actions';
 import { getMessageList } from '../utils/messages';
 
-const base_url = `http://${window.location.hostname}:3000`;
+const base_url = process.env.API_URL;
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export const messageService = store => next => action => {
