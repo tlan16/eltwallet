@@ -33,6 +33,7 @@ class PinCode extends Component {
   static propTypes = {
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired,
+      getParam: PropTypes.func.isRequired,
     }).isRequired,
     pinCode: PropTypes.string.isRequired,
   };
@@ -42,7 +43,9 @@ class PinCode extends Component {
   };
 
   onAuthSuccess = () => {
-    this.props.navigation.navigate('Wallet');
+    if (this.props.navigation.getParam('onAuthSuccess') instanceof Function)
+      this.props.navigation.getParam('onAuthSuccess')();
+    else this.props.navigation.navigate('Wallet');
   };
 
   onBackPress = () => {

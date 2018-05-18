@@ -63,7 +63,9 @@ class Settings extends Component {
     {
       title: 'View private key',
       onPress: () => {
-        this.props.navigation.navigate('PrivateKey');
+        this.props.navigation.navigate('PinCode', {
+          onAuthSuccess: () => this.props.navigation.navigate('PrivateKey'),
+        });
       },
     },
     {
