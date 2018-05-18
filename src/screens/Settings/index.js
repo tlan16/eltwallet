@@ -99,6 +99,12 @@ class Settings extends Component {
         );
       },
     },
+    {
+      title: 'Profile',
+      onPress: () => {
+        this.props.navigation.navigate('Profile');
+      },
+    },
   ];
 
   render() {

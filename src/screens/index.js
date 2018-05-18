@@ -15,6 +15,7 @@ import WalletHomeScreen from './WalletHome';
 import WalletReceiveScreen from './WalletReceive';
 import WalletSendScreen from './WalletSend';
 import ComposeMessageScreen from './ComposeMessage';
+import ProfileScreen from './Profile';
 
 export {
   AddTokenScreen,
@@ -34,4 +35,5 @@ export {
   WalletHomeScreen,
   WalletReceiveScreen,
   WalletSendScreen,
+  ProfileScreen,
 };

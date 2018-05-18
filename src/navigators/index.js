@@ -17,6 +17,7 @@ import {
   WalletHomeScreen,
   WalletReceiveScreen,
   WalletSendScreen,
+  ProfileScreen,
 } from '../screens';
 
 const WelcomeNavigator = StackNavigator(
@@ -77,6 +78,9 @@ const WalletMainNavigator = StackNavigator(
     },
     ComposeMessage: {
       screen: ComposeMessageScreen,
+    },
+    Profile: {
+      screen: ProfileScreen,
     },
   },
   {
