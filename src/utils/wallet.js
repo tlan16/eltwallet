@@ -66,7 +66,7 @@ export default class WalletUtils {
    * Reads an EthereumJSWallet instance from Redux store
    */
   static getWallet() {
-    const { privateKey } = store.wallet.getState();
+    const { privateKey } = store.getState().wallet;
 
     return EthereumJsWallet.fromPrivateKey(Buffer.from(privateKey, 'hex'));
   }
