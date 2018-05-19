@@ -3,6 +3,8 @@ import { Image, StyleSheet, TouchableOpacity, View, Text } from 'react-native';
 import IconBadge from 'react-native-icon-badge';
 import messageImg from './images/message.png';
 import { connect } from 'react-redux';
+import { getMessage } from '../../../../reducer';
+import { getUnreadMessageCount } from '../../../../reducer/message';
 
 class MessageIcon extends Component {
   render() {
@@ -40,9 +42,12 @@ class MessageIcon extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   unreadMessageCount: state.unreadMessageCount,
+// });
+
 const mapStateToProps = state => ({
-  // messages: state.messages,
-  unreadMessageCount: state.unreadMessageCount,
+  unreadMessageCount: getUnreadMessageCount(getMessage(state)),
 });
 
 export default connect(mapStateToProps)(MessageIcon);

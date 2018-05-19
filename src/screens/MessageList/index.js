@@ -15,6 +15,9 @@ import ComposeIcon from './components/composeIcon';
 import IsSending from './components/isSending';
 import { fetchMessages } from '../../actions';
 import moment from 'moment';
+import { getMessage, getWallet } from '../../reducer';
+import { getMessages, getIsSendingMessage } from '../../reducer/message';
+import { getWalletAddress } from '../../reducer/wallet';
 
 const styles = StyleSheet.create({
   container: {
@@ -75,7 +78,6 @@ class MessageList extends Component {
       const showFrom = message.sender_nickname
         ? message.sender_nickname
         : 'Anonymous';
-      console.log(moment(message.at));
       return {
         id: message.uuid,
         from: showFrom,
@@ -108,10 +110,15 @@ class MessageList extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   messages: state.messages,
+//   isSendingMessage: state.isSendingMessage,
+//   walletAddress: state.walletAddress,
+// });
 const mapStateToProps = state => ({
-  messages: state.messages,
-  isSendingMessage: state.isSendingMessage,
-  walletAddress: state.walletAddress,
+  messages: getMessages(getMessage(state)),
+  isSendingMessage: getIsSendingMessage(getMessage(state)),
+  walletAddress: getWalletAddress(getWallet(state)),
 });
 
 const mapDispatchToProps = dispatch => ({

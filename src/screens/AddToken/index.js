@@ -6,6 +6,8 @@ import { GradientBackground, Header, SecondaryButton } from '../../components';
 import Form from './components/Form';
 import { ADD_TOKEN, SET_DEFAULT_TOKEN } from '../../config/actionTypes';
 import AnalyticsUtils from '../../utils/analytics';
+import { getWallet } from '../../reducer';
+import { getNetwork } from '../../reducer/wallet';
 
 const styles = StyleSheet.create({
   container: {
@@ -126,8 +128,12 @@ class AddToken extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   network: state.network,
+// });
+
 const mapStateToProps = state => ({
-  network: state.network,
+  network: getNetwork(getWallet(state)),
 });
 
 const mapDispatchToProps = dispatch => ({

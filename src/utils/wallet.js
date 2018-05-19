@@ -66,13 +66,13 @@ export default class WalletUtils {
    * Reads an EthereumJSWallet instance from Redux store
    */
   static getWallet() {
-    const { privateKey } = store.getState();
+    const { privateKey } = store.wallet.getState();
 
     return EthereumJsWallet.fromPrivateKey(Buffer.from(privateKey, 'hex'));
   }
 
   static getWeb3HTTPProvider() {
-    switch (store.getState().network) {
+    switch (store.getState().wallet.network) {
       case 'ropsten':
         return new Web3.providers.HttpProvider(
           `https://ropsten.infura.io/${Config.INFURA_API_KEY}`,
@@ -93,7 +93,7 @@ export default class WalletUtils {
   }
 
   static getEtherscanApiSubdomain() {
-    switch (store.getState().network) {
+    switch (store.getState().wallet.network) {
       case 'ropsten':
         return 'api-ropsten';
       case 'kovan':
@@ -129,7 +129,7 @@ export default class WalletUtils {
    * Load the tokens the user owns
    */
   static loadTokensList() {
-    const { availableTokens, network, walletAddress } = store.getState();
+    const { availableTokens, network, walletAddress } = store.getState().wallet;
 
     if (network !== 'mainnet') return Promise.resolve();
 
@@ -182,7 +182,7 @@ export default class WalletUtils {
    * Fetch a list of ETH transactions for the user's wallet
    */
   static getEthTransactions() {
-    const { walletAddress } = store.getState();
+    const { walletAddress } = store.getState().wallet;
 
     return fetch(
       `https://${this.getEtherscanApiSubdomain()}.etherscan.io/api?module=account&action=txlist&address=${walletAddress}&sort=desc&apikey=${
@@ -210,7 +210,7 @@ export default class WalletUtils {
    * @param {String} contractAddress
    */
   static async getERC20Transactions(contractAddress, decimals) {
-    const { walletAddress } = store.getState();
+    const { walletAddress } = store.getState().wallet;
 
     const sentTransactions = await fetch(
       `https://${this.getEtherscanApiSubdomain()}.etherscan.io/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest&address=${contractAddress}&topic0=0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef&topic1=0x000000000000000000000000${walletAddress.replace(
@@ -274,7 +274,7 @@ export default class WalletUtils {
    * Get the user's wallet ETH balance
    */
   static getEthBalance() {
-    const { walletAddress } = store.getState();
+    const { walletAddress } = store.getState().wallet;
 
     const web3 = new Web3(this.getWeb3HTTPProvider());
 
@@ -302,7 +302,7 @@ export default class WalletUtils {
    * @param {Number} decimals
    */
   static getERC20Balance(contractAddress, decimals) {
-    const { walletAddress } = store.getState();
+    const { walletAddress } = store.getState().wallet;
 
     const web3 = new Web3(this.getWeb3HTTPProvider());
 

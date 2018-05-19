@@ -9,6 +9,8 @@ import {
   SecondaryButton,
 } from '../../components';
 import logo from './images/exce_logo.png';
+import { getWallet } from '../../reducer';
+import { getWalletAddress } from '../../reducer/wallet';
 
 const styles = StyleSheet.create({
   container: {
@@ -82,8 +84,11 @@ class Home extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   walletAddress: state.walletAddress,
+// });
 const mapStateToProps = state => ({
-  walletAddress: state.walletAddress,
+  walletAddress: getWalletAddress(getWallet(state)),
 });
 
 export default connect(mapStateToProps)(Home);

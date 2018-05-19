@@ -7,6 +7,8 @@ import { GradientBackground, Header, SecondaryButton } from '../../components';
 import Form from './components/Form';
 import AnalyticsUtils from '../../utils/analytics';
 import WalletUtils from '../../utils/wallet';
+import { getWallet } from '../../reducer';
+import { getSelectedToken } from '../../reducer/wallet';
 
 const styles = StyleSheet.create({
   container: {
@@ -137,8 +139,11 @@ class WalletSend extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   selectedToken: state.selectedToken,
+// });
 const mapStateToProps = state => ({
-  selectedToken: state.selectedToken,
+  selectedToken: getSelectedToken(getWallet(state)),
 });
 
 export default connect(mapStateToProps)(WalletSend);

@@ -17,8 +17,7 @@ function guid() {
 
 export default class AnalyticsUtils {
   static async getAnalyticsUserId() {
-    const userId = store.getState().walletAddress;
-
+    const userId = store.getState().wallet.walletAddress;
     if (userId) {
       return {
         userId,

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { GradientBackground, Header, Menu } from '../../components';
 import { DELETE_TOKEN, SET_DEFAULT_TOKEN } from '../../config/actionTypes';
+import { getWallet } from '../../reducer';
+import { getAvailableTokens } from '../../reducer/wallet';
 
 const styles = StyleSheet.create({
   container: {
@@ -65,8 +67,12 @@ class TokenPicker extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   availableTokens: state.availableTokens,
+// });
+
 const mapStateToProps = state => ({
-  availableTokens: state.availableTokens,
+  availableTokens: getAvailableTokens(getWallet(state)),
 });
 
 const mapDispatchToProps = dispatch => ({

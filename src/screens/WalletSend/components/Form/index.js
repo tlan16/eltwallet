@@ -14,6 +14,8 @@ import PropTypes from 'prop-types';
 import { Text } from '../../../../components';
 import cameraIcon from './images/camera.png';
 import arrowIcon from './images/arrow.png';
+import { getWallet } from '../../../../reducer';
+import { getSelectedToken } from '../../../../reducer/wallet';
 
 const styles = StyleSheet.create({
   formElement: {
@@ -150,8 +152,12 @@ class Form extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   selectedToken: state.selectedToken,
+// });
+
 const mapStateToProps = state => ({
-  selectedToken: state.selectedToken,
+  selectedToken: getSelectedToken(getWallet(state)),
 });
 
 export default connect(mapStateToProps)(Form);

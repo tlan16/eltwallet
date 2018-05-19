@@ -21,6 +21,8 @@ import WalletUtils from '../../utils/wallet';
 import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
 import { sendMessage } from '../../actions';
+import { getWallet } from '../../reducer';
+import { getSelectedToken, getWalletAddress } from '../../reducer/wallet';
 
 const styles = StyleSheet.create({
   container: {
@@ -178,9 +180,14 @@ class ComposeMessage extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   selectedToken: state.selectedToken,
+//   walletAddress: state.walletAddress,
+// });
+
 const mapStateToProps = state => ({
-  selectedToken: state.selectedToken,
-  walletAddress: state.walletAddress,
+  selectedToken: getSelectedToken(getWallet(state)),
+  walletAddress: getWalletAddress(getWallet(state)),
 });
 
 const mapDispatchToProps = dispatch => ({

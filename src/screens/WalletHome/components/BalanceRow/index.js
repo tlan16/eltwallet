@@ -7,6 +7,8 @@ import IconBadge from 'react-native-icon-badge';
 import switchIcon from './images/switch.png';
 import settingsIcon from './images/settings.png';
 import MessageIcon from './messageIcon';
+import { getWallet } from '../../../../reducer';
+import { getSelectedToken } from '../../../../reducer/wallet';
 
 const styles = StyleSheet.create({
   container: {
@@ -100,8 +102,12 @@ class BalanceRow extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   selectedToken: state.selectedToken,
+// });
+
 const mapStateToProps = state => ({
-  selectedToken: state.selectedToken,
+  selectedToken: getSelectedToken(getWallet(state)),
 });
 
 export default connect(mapStateToProps)(BalanceRow);

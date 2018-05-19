@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { GradientBackground, Header, Menu, Text } from '../../components';
 import { LOGOUT } from '../../config/actionTypes';
 import { persistor } from '../../config/store';
+import { getNetwork } from '../../reducer/wallet';
+import { getWallet } from '../../reducer';
 
 const styles = StyleSheet.create({
   container: {
@@ -127,8 +129,11 @@ class Settings extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   network: state.network,
+// });
 const mapStateToProps = state => ({
-  network: state.network,
+  network: getNetwork(getWallet(state)),
 });
 
 const mapDispatchToProps = dispatch => ({

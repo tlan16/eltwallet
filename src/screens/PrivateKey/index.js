@@ -8,6 +8,8 @@ import {
   SecondaryButton,
   Text,
 } from '../../components';
+import { getWallet } from '../../reducer/';
+import { getPrivateKey } from '../../reducer/wallet';
 
 const styles = StyleSheet.create({
   container: {
@@ -71,8 +73,12 @@ class PrivateKey extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   privateKey: state.privateKey,
+// });
+
 const mapStateToProps = state => ({
-  privateKey: state.privateKey,
+  privateKey: getPrivateKey(getWallet(state)),
 });
 
 export default connect(mapStateToProps)(PrivateKey);

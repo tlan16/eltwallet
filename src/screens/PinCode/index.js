@@ -8,6 +8,8 @@ import {
   PinIndicator,
   PinKeyboard,
 } from '../../components';
+import { getSystem } from '../../reducer/';
+import { getPinCode } from '../../reducer/system';
 
 const styles = StyleSheet.create({
   container: {
@@ -105,8 +107,11 @@ class PinCode extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   pinCode: state.pinCode,
+// });
 const mapStateToProps = state => ({
-  pinCode: state.pinCode,
+  pinCode: getPinCode(getSystem(state)),
 });
 
 export default connect(mapStateToProps)(PinCode);

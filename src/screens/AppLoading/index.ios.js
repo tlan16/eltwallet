@@ -7,6 +7,9 @@ import {
   SET_PRIVATE_KEY,
   SET_WALLET_ADDRESS,
 } from '../../config/actionTypes';
+import { getWallet, getSystem } from '../../reducer';
+import { getWalletAddress } from '../../reducer/wallet';
+import { getPinCode } from '../../reducer/system';
 
 class AppLoading extends Component {
   static propTypes = {
@@ -75,9 +78,13 @@ class AppLoading extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   pinCode: state.pinCode,
+//   walletAddress: state.walletAddress,
+// });
 const mapStateToProps = state => ({
-  pinCode: state.pinCode,
-  walletAddress: state.walletAddress,
+  pinCode: getPinCode(getSystem(state)),
+  walletAddress: getWalletAddress(getWallet(state)),
 });
 
 export default connect(mapStateToProps)(AppLoading);

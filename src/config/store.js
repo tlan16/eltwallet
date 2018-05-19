@@ -3,16 +3,20 @@ import { createLogger } from 'redux-logger';
 import { createMigrate, persistReducer, persistStore } from 'redux-persist';
 import createSensitiveStorage from 'redux-persist-sensitive-storage';
 import uuid from 'react-native-uuid';
-import { defaultState, rootReducer } from './reducer';
+//import { defaultState, rootReducer } from './reducer';
 import { messageService } from '../service';
-
+import rootReducer from '../reducer';
+import { defaultState } from '../reducer';
 const migrations = {
   0: state => ({
     ...state,
-    availableTokens: state.availableTokens.map(token => ({
-      ...token,
-      id: uuid.v4(),
-    })),
+    wallet: {
+      ...state.wallet,
+      availableTokens: state.wallet.availableTokens.map(token => ({
+        ...token,
+        id: uuid.v4(),
+      })),
+    },
   }),
 };
 

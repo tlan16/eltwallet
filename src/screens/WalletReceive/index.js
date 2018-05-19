@@ -9,6 +9,8 @@ import {
   SecondaryButton,
   Text,
 } from '../../components';
+import { getWallet } from '../../reducer';
+import { getWalletAddress } from '../../reducer/wallet';
 
 const styles = StyleSheet.create({
   container: {
@@ -87,8 +89,12 @@ class WalletReceive extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   walletAddress: state.walletAddress,
+// });
+
 const mapStateToProps = state => ({
-  walletAddress: state.walletAddress,
+  walletAddress: getWalletAddress(getWallet(state)),
 });
 
 export default connect(mapStateToProps)(WalletReceive);

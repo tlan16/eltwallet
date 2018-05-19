@@ -12,6 +12,9 @@ import {
 import { SET_CALL_TO_ACTION_DISMISSED } from '../../config/actionTypes';
 import WalletUtils from '../../utils/wallet';
 import { fetchMessages, fetchUnreadMessageCount } from '../../actions';
+import { getSelectedToken, getWalletAddress } from '../../reducer/wallet';
+import { getWallet, getSystem } from '../../reducer';
+import { getCallToActionDismissed } from '../../reducer/system';
 
 const styles = StyleSheet.create({
   container: {
@@ -164,6 +167,7 @@ class WalletHome extends Component {
   };
 
   fetchBalance = async () => {
+    console.log('****', this.props.selectedToken);
     const currentBalance = await WalletUtils.getBalance(
       this.props.selectedToken,
     );
@@ -256,10 +260,16 @@ class WalletHome extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   callToActionDismissed: state.callToActionDismissed,
+//   selectedToken: state.selectedToken,
+//   walletAddress: state.walletAddress,
+// });
+
 const mapStateToProps = state => ({
-  callToActionDismissed: state.callToActionDismissed,
-  selectedToken: state.selectedToken,
-  walletAddress: state.walletAddress,
+  callToActionDismissed: getCallToActionDismissed(getSystem(state)),
+  selectedToken: getSelectedToken(getWallet(state)),
+  walletAddress: getWalletAddress(getWallet(state)),
 });
 
 const mapDispatchToProps = dispatch => ({

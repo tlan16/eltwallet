@@ -14,6 +14,8 @@ import {
   SecondaryButton,
   Text,
 } from '../../components';
+import { getSelectedMessage } from '../../reducer/message';
+import { getMessage } from '../../reducer';
 
 const styles = StyleSheet.create({
   container: {
@@ -79,8 +81,11 @@ class ViewMessage extends Component {
   }
 }
 
+// const mapStateToProps = state => ({
+//   selectedMessage: state.selectedMessage,
+// });
 const mapStateToProps = state => ({
-  selectedMessage: state.selectedMessage,
+  selectedMessage: getSelectedMessage(getMessage(state)),
 });
 
 export default connect(mapStateToProps)(ViewMessage);
