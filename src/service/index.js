@@ -44,15 +44,17 @@ export const messageService = store => next => action => {
 
 const setProfile = (email, nickname, address, next) => {
   const set_profile_url = `${base_url}/api/wallet`;
+  const message = { address, nickname, email };
+  console.log(message);
   request
     .post(set_profile_url)
-    .send({ address, nickname, email })
+    .send(message)
     .set('Accept', 'application/json')
     .end((err, res) => {
       if (err) {
         console.log(err);
       }
-      console.log(res);
+      console.log(res.body);
       next(saveProfile(email, nickname));
     });
 };

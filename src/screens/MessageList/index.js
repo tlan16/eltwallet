@@ -75,8 +75,9 @@ class MessageList extends Component {
   render() {
     const { messages } = this.props;
     const options = messages.map(message => {
-      const showFrom = message.sender_nickname
-        ? message.sender_nickname
+      //bad spelling from back-end
+      const showFrom = message.senser_nickname
+        ? message.senser_nickname
         : 'Anonymous';
       return {
         id: message.uuid,
