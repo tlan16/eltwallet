@@ -15,40 +15,40 @@ import {
 import { defaultTokens } from '../utils/constants';
 import AnalyticsUtils from '../utils/analytics';
 import { markMessageAsRead } from '../utils/messages';
-const defaultmessages = [
-  {
-    uuid: '0',
-    sender_address: '0x12345               ',
-    title: 'title0',
-    body: 'here is some body content 0',
-    updatedAt: '2018-05-07T06:25:36.629Z',
-    createdAt: '2018-05-07T06:25:36.629Z',
-    recipients: [
-      {
-        address: '0x22222',
-      },
-      {
-        address: '0x33333',
-      },
-    ],
-  },
-  {
-    uuid: '1',
-    sender_address: '0x12345               ',
-    title: 'title1',
-    body: 'here is some body content 1',
-    updatedAt: '2018-03-07T08:25:36.629Z',
-    createdAt: '2018-03-07T08:25:36.629Z',
-    recipients: [
-      {
-        address: '0x22222',
-      },
-      {
-        address: '0x33333',
-      },
-    ],
-  },
-];
+// const defaultmessages = [
+//   {
+//     uuid: '0',
+//     sender_address: '0x12345               ',
+//     title: 'title0',
+//     body: 'here is some body content 0',
+//     updatedAt: '2018-05-07T06:25:36.629Z',
+//     createdAt: '2018-05-07T06:25:36.629Z',
+//     recipients: [
+//       {
+//         address: '0x22222',
+//       },
+//       {
+//         address: '0x33333',
+//       },
+//     ],
+//   },
+//   {
+//     uuid: '1',
+//     sender_address: '0x12345               ',
+//     title: 'title1',
+//     body: 'here is some body content 1',
+//     updatedAt: '2018-03-07T08:25:36.629Z',
+//     createdAt: '2018-03-07T08:25:36.629Z',
+//     recipients: [
+//       {
+//         address: '0x22222',
+//       },
+//       {
+//         address: '0x33333',
+//       },
+//     ],
+//   },
+// ];
 
 const defaultState = {
   availableTokens: defaultTokens,
@@ -59,6 +59,8 @@ const defaultState = {
   selectedMessage: null,
   isSendingMessage: false,
   unreadMessageCount: 0,
+  nickname: null,
+  email: null,
 };
 
 const appReducer = (state = defaultState, action) => {

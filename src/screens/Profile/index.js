@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { connect } from 'react-redux';
 import { GradientBackground, Header, SecondaryButton } from '../../components';
 import Form from './components/Form';
+import validator from 'validator';
+import { setProfile } from '../../actions';
+import { getWallet } from '../../reducer';
+import { getWalletAddress } from '../../reducer/wallet';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,6 +22,14 @@ const styles = StyleSheet.create({
 });
 
 class Profile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      nickname: '',
+    };
+  }
+
   render() {
     return (
       <GradientBackground>
@@ -25,13 +38,41 @@ class Profile extends Component {
             onBackPress={() => this.props.navigation.goBack()}
             title="Profile"
           />
-          <Form />
+          <Form
+            onEmailChange={email => this.setState({ email })}
+            onNicknameChange={nickname => this.setState({ nickname })}
+          />
         </SafeAreaView>
         <View style={styles.buttonContainer}>
-          <SecondaryButton text="Save" />
+          <SecondaryButton
+            text="Save"
+            onPress={() => {
+              this.props.setProfile(
+                this.state.email,
+                this.state.nickname,
+                this.props.walletAddress,
+              );
+            }}
+            disabled={
+              this.state.email.trim() == '' ||
+              this.state.nickname.trim() == '' ||
+              !validator.isEmail(this.state.email)
+            }
+          />
         </View>
       </GradientBackground>
     );
   }
 }
-export default Profile;
+
+const mapStateToProps = state => ({
+  walletAddress: getWalletAddress(getWallet(state)),
+});
+
+const mapDispatchToProps = dispatch => ({
+  setProfile: (email, nickname, walletAddress) => {
+    dispatch(setProfile(email, nickname, walletAddress));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

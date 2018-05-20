@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Form = ({}) => {
+const Form = ({ onNicknameChange, onEmailChange }) => {
   const ScrollContainer =
     Platform.OS === 'ios' ? KeyboardAwareScrollView : ScrollView;
   return (
@@ -50,13 +50,13 @@ const Form = ({}) => {
       <View style={styles.formElement}>
         <Text style={styles.formLabel}>Email</Text>
         <View style={styles.formInputRow}>
-          <TextInput style={styles.formInput} />
+          <TextInput style={styles.formInput} onChangeText={onEmailChange} />
         </View>
       </View>
       <View style={styles.formElement}>
         <Text style={styles.formLabel}>Nickname</Text>
         <View style={styles.formInputRow}>
-          <TextInput style={styles.formInput} />
+          <TextInput style={styles.formInput} onChangeText={onNicknameChange} />
         </View>
       </View>
     </ScrollContainer>

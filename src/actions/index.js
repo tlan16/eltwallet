@@ -39,3 +39,15 @@ export const sendMessageSuccess = () => ({
 export const sendMessageFail = () => ({
   type: 'SEND_MESSAGE_FAIL',
 });
+
+export const saveProfile = (email, nickname) => ({
+  type: 'SAVE_PROFILE',
+  email: email,
+  nickname: nickname,
+});
+export const setProfile = (email, nickname, address) => ({
+  type: 'SET_PROFILE',
+  email: email,
+  nickname: nickname,
+  address: address,
+});

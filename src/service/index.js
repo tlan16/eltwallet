@@ -6,10 +6,12 @@ import {
   sendMessageStart,
   sendMessageSuccess,
   sendMessageFail,
+  saveProfile,
 } from '../actions';
 import { getMessageList } from '../utils/messages';
 
-const base_url = process.env.API_URL;
+//const base_url = process.env.API_URL;
+const base_url = `http://localhost:3000`;
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export const messageService = store => next => action => {
@@ -32,9 +34,27 @@ export const messageService = store => next => action => {
         next,
       );
       break;
+    case 'SET_PROFILE':
+      setProfile(action.email, action.nickname, action.address, next);
+      break;
     default:
       break;
   }
+};
+
+const setProfile = (email, nickname, address, next) => {
+  const set_profile_url = `${base_url}/api/wallet`;
+  request
+    .post(set_profile_url)
+    .send({ address, nickname, email })
+    .set('Accept', 'application/json')
+    .end((err, res) => {
+      if (err) {
+        console.log(err);
+      }
+      console.log(res);
+      next(saveProfile(email, nickname));
+    });
 };
 
 const fetchMessages = (address, receiveMessages, failToReceive, next) => {
@@ -75,7 +95,6 @@ const markMessageAsRead = selectedMessage => {
       if (err) {
         console.log(err);
       }
-      console.log(res);
     });
 };
 
