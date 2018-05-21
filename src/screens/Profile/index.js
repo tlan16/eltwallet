@@ -5,8 +5,9 @@ import { GradientBackground, Header, SecondaryButton } from '../../components';
 import Form from './components/Form';
 import validator from 'validator';
 import { setProfile } from '../../actions';
-import { getWallet } from '../../reducer';
+import { getWallet, getProfile } from '../../reducer';
 import { getWalletAddress } from '../../reducer/wallet';
+import { getEmail, getNickname } from '../../reducer/profile';
 
 const styles = StyleSheet.create({
   container: {
@@ -41,6 +42,8 @@ class Profile extends Component {
           <Form
             onEmailChange={email => this.setState({ email })}
             onNicknameChange={nickname => this.setState({ nickname })}
+            email={this.props.email}
+            nickname={this.props.nickname}
           />
         </SafeAreaView>
         <View style={styles.buttonContainer}>
@@ -68,6 +71,8 @@ class Profile extends Component {
 
 const mapStateToProps = state => ({
   walletAddress: getWalletAddress(getWallet(state)),
+  email: getEmail(getProfile(state)),
+  nickname: getNickname(getProfile(state)),
 });
 
 const mapDispatchToProps = dispatch => ({
