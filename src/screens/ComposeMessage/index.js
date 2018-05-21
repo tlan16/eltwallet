@@ -116,7 +116,6 @@ class ComposeMessage extends Component {
   componentDidMount() {
     this.fetchTransactions();
   }
-
   render() {
     const ScrollContainer =
       Platform.OS === 'ios' ? KeyboardAwareScrollView : ScrollView;
@@ -141,12 +140,15 @@ class ComposeMessage extends Component {
             onBackPress={() => this.props.navigation.navigate('MessageList')}
             title="Compose"
             rightComponent={
-              <SendIcon
-                onPress={() => {
-                  this.sendNewMessage();
-                  this.props.navigation.navigate('MessageList');
-                }}
-              />
+              this.state.messageBody.trim() == '' ||
+              this.state.messageTitle == '' ? null : (
+                <SendIcon
+                  onPress={() => {
+                    this.sendNewMessage();
+                    this.props.navigation.navigate('MessageList');
+                  }}
+                />
+              )
             }
           />
           <ScrollContainer
