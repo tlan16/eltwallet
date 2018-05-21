@@ -79,10 +79,13 @@ class MessageList extends Component {
       const showFrom = message.senser_nickname
         ? message.senser_nickname
         : 'Anonymous';
+      const show_created_at = `${moment(message.created_at).format(
+        'hh:mm:ss a',
+      )}`;
       return {
         id: message.uuid,
         from: showFrom,
-        at: message.created_at,
+        created_at: show_created_at,
         onPress: this.messageOnPress,
         swipeToDelete: false,
         onDeletePress: this.deleteMessage,

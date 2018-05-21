@@ -64,7 +64,7 @@ const MessageItem = ({ option, index }) => {
             <Image source={isRead} style={styles.rowIcon} />
             <View stype={styles.messageContainer}>
               <Text style={styles.rowText}>{option.from}</Text>
-              <Text style={styles.rowText}>{option.at}</Text>
+              <Text style={styles.rowText}>{option.created_at}</Text>
             </View>
             <Image source={arrow} style={styles.rowIcon} />
           </View>
@@ -85,7 +85,7 @@ const MessageItem = ({ option, index }) => {
         <View stype={styles.messageContainer}>
           <Text style={styles.rowText}>{option.from}</Text>
           <Text style={styles.rowText}>{option.title}</Text>
-          <Text style={styles.rowText}>{option.at}</Text>
+          <Text style={styles.rowText}>{option.created_at}</Text>
         </View>
         <Image source={arrow} style={styles.rowIcon} />
       </View>
