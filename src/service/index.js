@@ -7,6 +7,8 @@ import {
   sendMessageSuccess,
   sendMessageFail,
   saveProfile,
+  setProfileStart,
+  failToSetProfile,
 } from '../actions';
 import { getMessageList } from '../utils/messages';
 
@@ -45,17 +47,18 @@ export const messageService = store => next => action => {
 const setProfile = (email, nickname, address, next) => {
   const set_profile_url = `${base_url}/api/wallet`;
   const message = { address, nickname, email };
-  console.log(message);
+  next(setProfileStart());
   request
     .post(set_profile_url)
     .send(message)
     .set('Accept', 'application/json')
     .end((err, res) => {
-      if (err) {
-        console.log(err);
-      }
-      console.log(res.body);
-      next(saveProfile(email, nickname));
+      delay(2000).then(() => {
+        if (err) {
+          next(failToSetProfile(err));
+        }
+        next(saveProfile(email, nickname));
+      });
     });
 };
 

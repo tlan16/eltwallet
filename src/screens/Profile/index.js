@@ -52,6 +52,7 @@ class Profile extends Component {
                 this.state.nickname,
                 this.props.walletAddress,
               );
+              this.props.navigation.navigate('WalletHome');
             }}
             disabled={
               this.state.email.trim() == '' ||

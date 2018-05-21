@@ -13,8 +13,11 @@ import { SET_CALL_TO_ACTION_DISMISSED } from '../../config/actionTypes';
 import WalletUtils from '../../utils/wallet';
 import { fetchMessages, fetchUnreadMessageCount } from '../../actions';
 import { getSelectedToken, getWalletAddress } from '../../reducer/wallet';
-import { getWallet, getSystem } from '../../reducer';
+import { getWallet, getSystem, getProfile } from '../../reducer';
+import { isSavingProfile } from '../../reducer/profile';
 import { getCallToActionDismissed } from '../../reducer/system';
+import IsSaving from './isSaving';
+import { getIsSavingProfile } from '../../reducer/profile';
 
 const styles = StyleSheet.create({
   container: {
@@ -167,7 +170,6 @@ class WalletHome extends Component {
   };
 
   fetchBalance = async () => {
-    console.log('****', this.props.selectedToken);
     const currentBalance = await WalletUtils.getBalance(
       this.props.selectedToken,
     );
@@ -197,6 +199,7 @@ class WalletHome extends Component {
   };
 
   render() {
+    if (this.props.isSavingProfile) return <IsSaving />;
     return (
       <GradientBackground>
         <SafeAreaView style={styles.container}>
@@ -270,6 +273,7 @@ const mapStateToProps = state => ({
   callToActionDismissed: getCallToActionDismissed(getSystem(state)),
   selectedToken: getSelectedToken(getWallet(state)),
   walletAddress: getWalletAddress(getWallet(state)),
+  isSavingProfile: getIsSavingProfile(getProfile(state)),
 });
 
 const mapDispatchToProps = dispatch => ({

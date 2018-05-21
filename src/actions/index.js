@@ -19,7 +19,7 @@ export const receiveUnreadMessageCount = count => ({
 });
 
 export const failToReceive = err => ({
-  type: 'FETCH_MESSAGES_FAIL',
+  type: 'FAIL_TO_RECEIVE',
   err: err,
 });
 
@@ -50,4 +50,13 @@ export const setProfile = (email, nickname, address) => ({
   email: email,
   nickname: nickname,
   address: address,
+});
+
+export const setProfileStart = () => ({
+  type: 'SET_PROFILE_START',
+});
+
+export const setProfileFail = err => ({
+  type: 'FAIL_TO_SET_PROFILE',
+  err: err,
 });
