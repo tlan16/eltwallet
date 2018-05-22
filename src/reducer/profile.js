@@ -23,6 +23,12 @@ const profileReducer = (state = defaultState, action) => {
         ...state,
         isSavingProfile: false,
       };
+    case 'RECEIVE_PROFILE':
+      return {
+        ...state,
+        nickname: action.nickname,
+        email: action.email,
+      };
     default:
       return state;
   }

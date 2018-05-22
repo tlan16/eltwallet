@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { GradientBackground, Header, SecondaryButton } from '../../components';
 import Form from './components/Form';
 import validator from 'validator';
-import { setProfile } from '../../actions';
+import { setProfile, fetchProfile } from '../../actions';
 import { getWallet, getProfile } from '../../reducer';
 import { getWalletAddress } from '../../reducer/wallet';
 import { getEmail, getNickname } from '../../reducer/profile';
@@ -29,6 +29,9 @@ class Profile extends Component {
       email: '',
       nickname: '',
     };
+  }
+  componentDidMount() {
+    this.props.fetchProfile(this.props.walletAddress);
   }
 
   render() {
@@ -78,6 +81,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   setProfile: (email, nickname, walletAddress) => {
     dispatch(setProfile(email, nickname, walletAddress));
+  },
+  fetchProfile: walletAddress => {
+    dispatch(fetchProfile(walletAddress));
   },
 });
 

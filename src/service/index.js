@@ -9,6 +9,8 @@ import {
   saveProfile,
   setProfileStart,
   failToSetProfile,
+  fetchProfile,
+  receiveProfile,
 } from '../actions';
 import { getMessageList } from '../utils/messages';
 
@@ -39,6 +41,8 @@ export const messageService = store => next => action => {
     case 'SET_PROFILE':
       setProfile(action.email, action.nickname, action.address, next);
       break;
+    case 'FETCH_PROFILE':
+      fetchUserProfile(action.address, next);
     default:
       break;
   }
@@ -82,8 +86,6 @@ const fetchUnreadMessageCount = (
   const fetch_unread_messages_count_url = `${base_url}/api/unread-message/recipient/${address}/count`;
   request.get(fetch_unread_messages_count_url).end((err, res) => {
     if (err) {
-      console.log('&&&&&');
-      console.log(err);
       return next(failToReceive(err));
     }
     const count = JSON.parse(res.text);
@@ -118,4 +120,14 @@ const sendMessage = (message, sendMessageSuccess, sendMessageFail, next) => {
       }
       delay(2000).then(() => next(sendMessageSuccess()));
     });
+};
+const fetchUserProfile = (address, next) => {
+  const fetch_profile_url = `${base_url}/api/wallet/address/${address}`;
+  request.get(fetch_profile_url).end((err, res) => {
+    if (err) {
+      console.log(err);
+    }
+    const profile = JSON.parse(res.text);
+    next(receiveProfile(profile.nickname, profile.email));
+  });
 };

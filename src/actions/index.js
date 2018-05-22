@@ -61,3 +61,13 @@ export const setProfileFail = err => ({
   type: 'FAIL_TO_SET_PROFILE',
   err: err,
 });
+
+export const fetchProfile = address => ({
+  type: 'FETCH_PROFILE',
+  address: address,
+});
+export const receiveProfile = (nickname, email) => ({
+  type: 'RECEIVE_PROFILE',
+  nickname: nickname,
+  email: email,
+});
