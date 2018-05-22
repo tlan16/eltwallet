@@ -76,8 +76,8 @@ class MessageList extends Component {
     const { messages } = this.props;
     const options = messages.map(message => {
       //bad spelling from back-end
-      const showFrom = message.senser_nickname
-        ? message.senser_nickname
+      const showFrom = message.sender_nickname
+        ? message.sender_nickname
         : 'Anonymous';
       const show_created_at = `${moment(message.created_at).format(
         'hh:mm:ss a',
