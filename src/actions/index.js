@@ -36,8 +36,9 @@ export const sendMessageSuccess = () => ({
   type: 'SEND_MESSAGE_SUCCESS',
 });
 
-export const sendMessageFail = () => ({
+export const sendMessageFail = err => ({
   type: 'SEND_MESSAGE_FAIL',
+  err: err,
 });
 
 export const saveProfile = (email, nickname) => ({

@@ -4,12 +4,14 @@ import systemReducer from './system';
 import messageReducer from './message';
 import profileReducer from './profile';
 import { defaultTokens } from '../utils/constants';
+import errorReducer from './error';
 
 const appReducer = combineReducers({
   wallet: walletReducer,
   system: systemReducer,
   message: messageReducer,
   profile: profileReducer,
+  error: errorReducer,
 });
 
 const rootReducer = (state, action) => {
@@ -25,6 +27,7 @@ export const getWallet = state => state.wallet;
 export const getSystem = state => state.system;
 export const getMessage = state => state.message;
 export const getProfile = state => state.profile;
+export const getError = state => state.error;
 export const defaultState = {
   wallet: {
     availableTokens: defaultTokens,

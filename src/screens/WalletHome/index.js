@@ -13,9 +13,10 @@ import { SET_CALL_TO_ACTION_DISMISSED } from '../../config/actionTypes';
 import WalletUtils from '../../utils/wallet';
 import { fetchMessages, fetchUnreadMessageCount } from '../../actions';
 import { getSelectedToken, getWalletAddress } from '../../reducer/wallet';
-import { getWallet, getSystem, getProfile } from '../../reducer';
+import { getWallet, getSystem, getProfile, getError } from '../../reducer';
 import { isSavingProfile } from '../../reducer/profile';
 import { getCallToActionDismissed } from '../../reducer/system';
+import { getErrorMessage } from '../../reducer/error';
 import IsSaving from './isSaving';
 import { getIsSavingProfile } from '../../reducer/profile';
 
@@ -198,6 +199,12 @@ class WalletHome extends Component {
     WalletUtils.loadTokensList();
   };
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.errorMessage != this.props.errorMessage) {
+      Alert.alert('Something is wrong!', this.props.errorMessage);
+    }
+  }
+
   render() {
     if (this.props.isSavingProfile) return <IsSaving />;
     return (
@@ -274,6 +281,7 @@ const mapStateToProps = state => ({
   selectedToken: getSelectedToken(getWallet(state)),
   walletAddress: getWalletAddress(getWallet(state)),
   isSavingProfile: getIsSavingProfile(getProfile(state)),
+  errorMessage: getErrorMessage(getError(state)),
 });
 
 const mapDispatchToProps = dispatch => ({

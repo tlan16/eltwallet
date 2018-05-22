@@ -82,6 +82,8 @@ const fetchUnreadMessageCount = (
   const fetch_unread_messages_count_url = `${base_url}/api/unread-message/recipient/${address}/count`;
   request.get(fetch_unread_messages_count_url).end((err, res) => {
     if (err) {
+      console.log('&&&&&');
+      console.log(err);
       return next(failToReceive(err));
     }
     const count = JSON.parse(res.text);

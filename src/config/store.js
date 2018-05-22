@@ -31,6 +31,7 @@ const persistConfig = {
   version: 1,
   storage,
   migrate: createMigrate(migrations, { debug: false }),
+  blacklist: ['error'],
 };
 
 const middlewares = [messageService];
