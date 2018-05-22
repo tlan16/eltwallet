@@ -13,9 +13,8 @@ import {
   receiveProfile,
 } from '../actions';
 import { getMessageList } from '../utils/messages';
-
-//const base_url = process.env.API_URL;
-const base_url = `http://localhost:3000`;
+import Config from 'react-native-config';
+const base_url = Config.API_URL;
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 export const messageService = store => next => action => {
