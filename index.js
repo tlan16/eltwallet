@@ -8,29 +8,30 @@ import './shim';
 import Navigator from './src/navigators';
 import { persistor, store } from './src/config/store';
 import AnalyticsUtils from './src/utils/analytics';
+import AppNavigator from './src/components/AppNavigator'
 
 if (process.env.NODE_ENV === 'production') {
   Sentry.config(Config.SENTRY_API_KEY).install();
 }
 
-const getCurrentRouteName = navigationState => {
-  if (!navigationState) {
-    return null;
-  }
+// const getCurrentRouteName = navigationState => {
+//   if (!navigationState) {
+//     return null;
+//   }
 
-  const route = navigationState.routes[navigationState.index];
+//   const route = navigationState.routes[navigationState.index];
 
-  if (route.routes) {
-    return getCurrentRouteName(route);
-  }
+//   if (route.routes) {
+//     return getCurrentRouteName(route);
+//   }
 
-  return route.routeName;
-};
+//   return route.routeName;
+// };
 
 const App = () => (
   <Provider store={store}>
     <PersistGate persistor={persistor}>
-      <Navigator
+      {/* <Navigator
         onNavigationStateChange={(prevState, currentState) => {
           const currentScreen = getCurrentRouteName(currentState);
           const prevScreen = getCurrentRouteName(prevState);
@@ -38,7 +39,8 @@ const App = () => (
             AnalyticsUtils.trackScreen(currentScreen);
           }
         }}
-      />
+      /> */}
+       <AppNavigator />
       <StatusBar barStyle="light-content" />
     </PersistGate>
   </Provider>

@@ -144,6 +144,7 @@ export default SwitchNavigator(
     PinCode: PinCodeScreen,
     Wallet: WalletNavigator,
     Welcome: WelcomeNavigator,
+    Profile: ProfileScreen,
   },
   {
     initialRouteName: 'AppLoading',

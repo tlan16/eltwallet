@@ -15,14 +15,14 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-  if (action.type === LOGOUT) {
+  if (action.type == 'LOGOUT') {
     state = undefined;
   }
 
   return appReducer(state, action);
 };
 
-export default appReducer;
+export default rootReducer;
 export const getWallet = state => state.wallet;
 export const getSystem = state => state.system;
 export const getMessage = state => state.message;

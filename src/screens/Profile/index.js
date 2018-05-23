@@ -31,17 +31,36 @@ class Profile extends Component {
     };
   }
   componentDidMount() {
-    this.props.fetchProfile(this.props.walletAddress);
+    const mode = this.props.navigation.getParam('mode');
+    if (mode !== 'createWallet') {
+      this.props.fetchProfile(this.props.walletAddress);
+    }
   }
 
   render() {
+    const mode = this.props.navigation.getParam('mode');
+    const header =
+      mode == 'createWallet' ? (
+        <Header title="Profile" />
+      ) : mode == 'recoverWallet' ? (
+        <Header
+          onBackPress={() => this.props.navigation.navigate('Wallet')}
+          title="Profile"
+        />
+      ) : (
+        <Header
+          onBackPress={() => this.props.navigation.goBack()}
+          title="Profile"
+        />
+      );
     return (
       <GradientBackground>
         <SafeAreaView style={styles.container}>
-          <Header
+          {/* <Header
             onBackPress={() => this.props.navigation.goBack()}
             title="Profile"
-          />
+          /> */}
+          {header}
           <Form
             onEmailChange={email => this.setState({ email })}
             onNicknameChange={nickname => this.setState({ nickname })}

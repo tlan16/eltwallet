@@ -98,7 +98,8 @@ export default class CreateWallet extends Component {
       return;
     }
 
-    this.props.navigation.navigate('Wallet');
+    // this.props.navigation.navigate('Wallet');
+    this.props.navigation.navigate('Profile', { mode: 'recoverWallet' });
   };
 
   render() {
