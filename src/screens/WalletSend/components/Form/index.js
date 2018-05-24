@@ -19,14 +19,14 @@ import { getSelectedToken } from '../../../../reducer/wallet';
 
 const styles = StyleSheet.create({
   formElement: {
-    borderBottomColor: '#3a3a3a',
+    borderBottomColor: '#e8cf75',
     borderBottomWidth: 1,
     paddingHorizontal: 15,
     paddingTop: Platform.OS === 'ios' ? 20 : 30,
     paddingBottom: 15,
   },
   formLabel: {
-    color: '#9d9d9d',
+    color: '#444650',
     paddingLeft: Platform.OS === 'ios' ? 0 : 4,
     paddingBottom: Platform.OS === 'ios' ? 10 : 0,
   },
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   formInput: {
-    color: '#fff',
+    color: '#e8cf75',
     flex: 1,
     flexGrow: 1,
     fontFamily: 'Varela Round',
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   tokenSymbol: {
-    color: '#fff',
+    color: '#e8cf75',
     fontSize: 18,
   },
   arrowIcon: {
@@ -102,7 +102,7 @@ class Form extends Component {
               autoCorrect={false}
               onChangeText={onAddressChange}
               placeholder="0x..."
-              placeholderTextColor="#9d9d9d"
+              placeholderTextColor="#e8cf75"
               onSubmitEditing={() => {
                 this.amountInput.focus();
               }}
@@ -128,7 +128,7 @@ class Form extends Component {
               keyboardType="numeric"
               onChangeText={onAmountChange}
               placeholder="1000"
-              placeholderTextColor="#9d9d9d"
+              placeholderTextColor="#e8cf75"
               ref={input => {
                 this.amountInput = input;
               }}

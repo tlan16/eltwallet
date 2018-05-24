@@ -3,7 +3,13 @@ import { Alert, SafeAreaView, StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { NavigationActions } from 'react-navigation';
-import { GradientBackground, Header, SecondaryButton } from '../../components';
+import {
+  GradientBackground,
+  Header,
+  SecondaryButton,
+  PrimaryButton,
+} from '../../components';
+import SendButton from './components/SendButton';
 import Form from './components/Form';
 import AnalyticsUtils from '../../utils/analytics';
 import WalletUtils from '../../utils/wallet';
@@ -126,7 +132,13 @@ class WalletSend extends Component {
             selectedToken={this.props.selectedToken}
           />
           <View style={styles.buttonContainer}>
-            <SecondaryButton
+            {/* <SecondaryButton 
+              disabled={!this.addressIsValid() || !this.amountIsValid()}
+              isLoading={this.state.isLoading}
+              onPress={this.sendTransaction}
+              text="Send"
+            /> */}
+            <SendButton
               disabled={!this.addressIsValid() || !this.amountIsValid()}
               isLoading={this.state.isLoading}
               onPress={this.sendTransaction}

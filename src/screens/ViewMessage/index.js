@@ -29,20 +29,22 @@ const styles = StyleSheet.create({
     borderColor: '#372F49',
     paddingVertical: 30,
     paddingHorizontal: 15,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center',
   },
 
   bodyContainer: {
     paddingVertical: 30,
     paddingHorizontal: 15,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
   },
-
+  rowLabel: {
+    color: '#444650',
+    fontSize: 18,
+  },
   rowText: {
-    color: '#fff',
+    color: '#e8cf75',
     fontSize: 18,
   },
 });
@@ -65,14 +67,22 @@ class ViewMessage extends Component {
           />
           <ScrollView>
             <View style={styles.rowContainer}>
-              <Text style={styles.rowText}>{`from:${
-                selectedMessage.sender_address
-              }`}</Text>
+              <View>
+                <Text style={styles.rowLabel}>{'from:'}</Text>
+              </View>
+              <View>
+                <Text style={styles.rowText}>
+                  {selectedMessage.sender_address}
+                </Text>
+              </View>
             </View>
             <View style={styles.bodyContainer}>
-              <Text style={styles.rowText}>{`body: ${
-                selectedMessage.body
-              }`}</Text>
+              <View>
+                <Text style={styles.rowLabel}>{'body:'}</Text>
+              </View>
+              <View>
+                <Text style={styles.rowText}>{selectedMessage.body}</Text>
+              </View>
             </View>
           </ScrollView>
         </SafeAreaView>

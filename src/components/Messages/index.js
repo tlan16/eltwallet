@@ -16,7 +16,7 @@ import MessageItem from './messageItem';
 const styles = StyleSheet.create({
   listContainer: {
     borderTopWidth: 1,
-    borderColor: '#372F49',
+    borderColor: '#e8cf75',
     flex: 1,
     marginTop: 40,
   },

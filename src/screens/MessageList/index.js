@@ -32,10 +32,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     paddingHorizontal: 15,
   },
-  headerText: {
-    color: '#fff',
-    fontSize: 27,
-  },
+
   messageContainer: {
     alignItems: 'center',
   },
@@ -48,7 +45,10 @@ class MessageList extends Component {
   }
   componentDidMount() {
     this.fetchMessages();
-    this.timerId = setInterval(this.fetchMessages, 5000);
+    if (!this.timerId) this.timerId = setInterval(this.fetchMessages, 5000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerId);
   }
   messageOnPress(id) {
     const { messages, selectMessage } = this.props;
@@ -68,7 +68,10 @@ class MessageList extends Component {
   };
 
   leaveMessageListPage = (page, callbackObj) => {
-    if (this.timerId) clearInterval(this.timerId);
+    if (this.timerId) {
+      clearInterval(this.timerId);
+      this.timerId = null;
+    }
     this.props.navigation.navigate(page, callbackObj);
   };
 

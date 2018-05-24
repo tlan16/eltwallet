@@ -6,11 +6,13 @@ import crossIcon from './images/cross.png';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#000',
+    backgroundColor: '#616773',
     borderRadius: 8,
     margin: 10,
     paddingHorizontal: 10,
     paddingVertical: 15,
+    borderWidth: 3,
+    borderColor: '#444650',
   },
   crossIconContainer: {
     padding: 5,
@@ -24,10 +26,10 @@ const styles = StyleSheet.create({
     width: 12,
   },
   title: {
-    color: '#fff',
+    color: '#444650',
   },
   subtitle: {
-    color: '#9D9D9D',
+    color: '#444650',
     fontSize: 12,
     marginTop: 5,
   },

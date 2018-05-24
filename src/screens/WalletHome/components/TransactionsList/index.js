@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
   emptyListText: {
-    color: '#aaa',
+    color: '#444650',
     textAlign: 'center',
     fontSize: 20,
     paddingTop: 20,

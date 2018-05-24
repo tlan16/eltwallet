@@ -23,14 +23,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   balance: {
-    color: '#fff',
+    color: '#e8cf75',
     fontSize: 30,
     letterSpacing: 3,
     paddingRight: 5,
   },
   coinSymbol: {
     alignSelf: 'flex-end',
-    color: '#fff',
+    color: '#e8cf75',
     fontSize: 15,
     letterSpacing: 3,
     paddingBottom: 4,

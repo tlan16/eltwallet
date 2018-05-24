@@ -31,14 +31,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   coinName: {
-    color: '#fff',
+    color: '#e8cf75',
     fontSize: 18,
     letterSpacing: 3,
     paddingVertical: 5,
     textAlign: 'center',
   },
   bannerContainer: {
-    backgroundColor: '#372F49',
+    backgroundColor: '#444650',
     paddingVertical: 5,
     paddingHorizontal: 15,
   },

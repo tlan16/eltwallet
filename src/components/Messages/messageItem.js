@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
   },
   rowContainer: {
     borderBottomWidth: 1,
-    borderColor: '#372F49',
+    borderColor: '#e8cf75',
     paddingVertical: 10,
     paddingHorizontal: 15,
     flexDirection: 'row',
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   rowText: {
-    color: '#fff',
+    color: '#e8cf75',
     fontSize: 18,
     flex: 3,
   },

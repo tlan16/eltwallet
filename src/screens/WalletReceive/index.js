@@ -11,6 +11,7 @@ import {
 } from '../../components';
 import { getWallet } from '../../reducer';
 import { getWalletAddress } from '../../reducer/wallet';
+import ShareButton from './ShareButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,14 +30,14 @@ const styles = StyleSheet.create({
   },
   addressTitle: {
     paddingHorizontal: 15,
-    color: '#fff',
+    color: '#e8cf75',
     textAlign: 'center',
     paddingBottom: 20,
     fontSize: 18,
   },
   walletAddress: {
     paddingHorizontal: 15,
-    color: '#9d9d9d',
+    color: '#e8cf75',
     textAlign: 'center',
   },
   buttonContainer: {
@@ -73,7 +74,16 @@ class WalletReceive extends Component {
             <Text style={styles.walletAddress}>{this.props.walletAddress}</Text>
           </View>
           <View style={styles.buttonContainer}>
-            <SecondaryButton
+            {/* <SecondaryButton
+              onPress={() => {
+                Share.share({
+                  message: this.props.walletAddress,
+                  title: 'My Eltwallet address',
+                });
+              }}
+              text="Share"
+            /> */}
+            <ShareButton
               onPress={() => {
                 Share.share({
                   message: this.props.walletAddress,

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   headerText: {
-    color: '#fff',
+    color: '#e8cf75',
     fontSize: 27,
   },
   headerArrow: {
