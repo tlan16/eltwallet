@@ -11,13 +11,15 @@ import Text from '../Text';
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#616773',
     borderRadius: 8,
     paddingVertical: 20,
+    borderColor: '#e8cf75',
+    borderWidth: 3,
   },
   text: {
     backgroundColor: 'transparent',
-    color: '#4D00FF',
+    color: '#e8cf75',
     fontSize: 18,
   },
 });

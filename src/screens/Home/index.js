@@ -14,7 +14,7 @@ import { getWalletAddress } from '../../reducer/wallet';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Config.LANDING_PG_BG_COLOR || 'transparent',
+    backgroundColor: '#616773',
     flex: 1,
     paddingBottom: 20,
     paddingHorizontal: 15,
@@ -39,10 +39,10 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   logoTitle: {
-    color: '#FFFFFF',
+    color: '#444650',
   },
   logoSubtitle: {
-    color: '#FFFFFF',
+    color: '#444650',
   },
 });
 
