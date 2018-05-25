@@ -81,12 +81,14 @@ class WalletHome extends Component {
     this.loadTokensList();
     // this.fetchMessages();
     this.fetchUnreadMessageCount();
-    this.timerId = setInterval(this.fetchUnreadMessageCount, 5000);
+    if (!this.timerId)
+      this.timerId = setInterval(this.fetchUnreadMessageCount, 5000);
   }
   leaveHomePage(page, callbackObject) {
     this.props.navigation.navigate(page, callbackObject);
     if (this.timerId) {
       clearInterval(this.timerId);
+      this.timerId = null;
     }
   }
 
@@ -157,8 +159,8 @@ class WalletHome extends Component {
     this.setState({ appState: nextAppState });
 
     if (currentState === 'background' && nextAppState === 'active') {
-      // this.props.navigation.navigate('PinCode');
-      this.leaveHomePage('PinCode');
+      this.props.navigation.navigate('PinCode');
+      //this.leaveHomePage('PinCode');
     }
   };
 
@@ -216,13 +218,13 @@ class WalletHome extends Component {
             </Text>
             <BalanceRow
               currentBalance={this.state.currentBalance}
-              onTokenChangeIconPress={() =>
-                // this.props.navigation.navigate('TokenPicker')
-                this.leaveHomePage('TokenPicker')
+              onTokenChangeIconPress={
+                () => this.props.navigation.navigate('TokenPicker')
+                // this.leaveHomePage('TokenPicker')
               }
-              onSettingsIconPress={() =>
-                // this.props.navigation.navigate('Settings')
-                this.leaveHomePage('Settings')
+              onSettingsIconPress={
+                () => this.props.navigation.navigate('Settings')
+                // this.leaveHomePage('Settings')
               }
               onMessageIconPress={() => {
                 //return this.props.navigation.navigate('MessageList');
@@ -255,13 +257,14 @@ class WalletHome extends Component {
           </View>
           <Footer
             onReceivePress={() => this.props.navigation.navigate('Receive')}
-            onSendPress={() =>
-              // this.props.navigation.navigate('Send', {
+            onSendPress={
+              () =>
+                this.props.navigation.navigate('Send', {
+                  onTokenChange: this.onTokenChange,
+                })
+              // this.leaveHomePage('Send', {
               //   onTokenChange: this.onTokenChange,
               // })
-              this.leaveHomePage('Send', {
-                onTokenChange: this.onTokenChange,
-              })
             }
           />
         </SafeAreaView>
