@@ -8,6 +8,7 @@ import { setProfile, fetchProfile } from '../../actions';
 import { getWallet, getProfile } from '../../reducer';
 import { getWalletAddress } from '../../reducer/wallet';
 import { getEmail, getNickname } from '../../reducer/profile';
+import SaveButton from './components/SaveButton';
 
 const styles = StyleSheet.create({
   container: {
@@ -69,7 +70,7 @@ class Profile extends Component {
           />
         </SafeAreaView>
         <View style={styles.buttonContainer}>
-          <SecondaryButton
+          <SaveButton
             text="Save"
             onPress={() => {
               this.props.setProfile(
